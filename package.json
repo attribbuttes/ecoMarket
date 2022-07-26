@@ -1,0 +1,22 @@
+{
+  "name": "armeria",
+  "version": "1.0.0",
+  "description": "app web de armeria",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/attribbuttes/armeria.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/attribbuttes/armeria/issues"
+  },
+  "homepage": "https://github.com/attribbuttes/armeria#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
