@@ -1,0 +1,72 @@
+<%- include('./partials/head')%>
+<%- include('./partials/header')%>
+
+<body>
+    
+<form method="post" action="/hola" class="create-form">
+    <div class="user-register">
+        <label for="fullName">Nombre Compleo</label>
+        <input type="text" name="fullName" placeholder="Nombre Completo">
+    </div>
+    <div class="user-register">
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="Nombre de usuario">
+    </div>
+    <div class="user-register">
+        <label for="birth-date">Fecha de Nacimiento</label>
+        <input type="date" name="birth-date" placeholder="fecha de nacimiento">
+    </div>
+    <div class="user-register">
+        <label for="address">Domicilio</label>
+        <input type="text" name="address" placeholder="domicilio">
+    </div>
+    <div class="user-register">
+        <label for="">Perfil del usuario</label><br>
+        <input type="checkbox" name="user-type" value="seller">
+        <label for="vendedor">Vender</label><br>
+        <input type="checkbox" name="user-type" value="buyer">
+        <label for="comprador">Comprar</label><br>
+    </div>
+    <div>
+        <label for="">Categorias de interes</label>
+        <div><label for="">Electro</label>
+        <input type="radio" name="cat-interest" value="electro">
+    </div>
+    <div>
+        <label for="">Moda</label>
+        <input type="radio" name="cat-interest" value="fashion">
+    </div>
+    <div>
+        <label for="">Hogar</label>
+        <input type="radio" name="cat-int" value="home">
+    </div>
+    <div>
+        <label for="">Jugueteria</label>
+        <input type="radio" name="cat-int" name="kids-toys">
+    </div>
+    <div>
+        <label for="">Vida Sana</label>
+        <input type="radio" name="cat-int" value="healthy-life">
+    </div>
+    </div>
+    <div>
+        <label for="">Foto de Usuario</label>
+        <img src="image.jpg" alt="">
+    </div>
+    <div>
+        <label for="">Contraseña</label>
+        <input type="password" name="password" id="">
+    </div>
+    <div>
+        <label for="">Confirmar Password</label>
+        <input type="password" name="conf-password" id="">
+    </div>
+    <div>
+        <button type="submit" class="form-button">GUARDAR</button>
+        <button type="reset" class="form-button">BORRAR</button>
+
+    </div>
+</form>
+<%- include('./partials/footer')%>
+</body>
+
