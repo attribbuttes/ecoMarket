@@ -1,297 +1,44 @@
-<%- include('./partials/head')%>
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('partials/head', {title: '?'}) %>
+<body>
+	<!-- Header -->
+	<%- include('partials/header') %>
+	<!-- /Header -->
 
-    <body>
-        <%- include('./partials/header')%>
+<!-- todos los productos -->
+<div class="container products-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="products-title">Camping</h2>
+        </div>
+        <% camping.forEach(product => { %>
+        <div class="col-12 col-sm-6 col-lg-3">
+            <section class="product-box">
+                <a href="/products/detail/<%= product.id %> ">
+                    <figure class="product-box_image">
+                        <img src="/images/<%= product.image %>" alt="imagen de producto">
+                    </figure>
+                    <article class="product-box_data">
+                        <h2>$<%= product.price %></h2>
+                        <% if (product.discount)  { %>
+                        <span><%= product.discount %>% OFF</span>
+                        <% } %>
+                        <p><%= product.name %></p>
+                        <i class="fas fa-truck"></i>
+                    </article>
+                </a>
+            </section>
+        </div>
+        <% }) %> 
+    </div>
+</div>
+<!-- /todos los productos -->
 
+	<!-- footer -->
+	<%- include('partials/footer') %>
+	<!-- /footer -->
 
-            <H1>LISTADO DE PRODUCTOS</H1>
-            <div class="main-container">
-                <!-- header -->
-                <div class="header">
-                    <div class="container">
-                        <div class="header-left">iSHOP</div>
-                        <div class="header-right">
-                            <span class="header-right-login">Log In</span>
-                            <span class="header-right-logout hide">Log Out</span>
-                            <span class="header-right-text"> Cart </span>
-                            <span class="header-right-items">0</span>
-                            <span class="header-right-price">0</span>
-                        </div><!-- .header-right -->
-                    </div><!-- .container -->
-                </div><!-- .header -->
-        
-                <!-- page -->
-                <div class="page container">
-                    <div class="products">
-                        <div class="product">
-                            <h2>Apple iPhone X</h2>
-                            <img src="https://i.imgur.com/8szrkoi.png" alt="title">
-                            <p class="product-price">600</p>
-                            <p class="product-description hide">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <span class="btn product-details">Details</span>
-                        </div>
-                        <div class="product">
-                            <h2>Apple iPhone 8 Plus</h2>
-                            <img src="https://fbtech.7uptheme.net/wp-content/uploads/2017/09/fb-tech-smartphone-01-258x172.png" alt="title">
-                            <p class="product-price">620</p>
-                            <p class="product-description hide">Riusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <span class="btn product-details">Details</span>
-                        </div>
-                        <div class="product">
-                            <h2>Dell Laptop</h2>
-                            <img src="https://fbtech.7uptheme.net/wp-content/uploads/2017/09/fb-tech-laptop-09-258x172.png" alt="title">
-                            <p class="product-price">500</p>
-                            <p class="product-description hide">Riusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <span class="btn product-details">Details</span>
-                        </div>
-                    </div>
-                    <div class="products">
-                        <div class="product">
-                            <h2>iPhone 8 New</h2>
-                            <img src="https://fbtech.7uptheme.net/wp-content/uploads/2017/09/fb-tech-smartphone-03-258x172.png" alt="title">
-                            <p class="product-price">500</p>
-                            <p class="product-description hide">Riusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <span class="btn product-details">Details</span>
-                        </div>
-                        <div class="product">
-                            <h2>Lenovo</h2>
-                            <img src="https://fbtech.7uptheme.net/wp-content/uploads/2017/09/fb-tech-laptop-02-258x172.png" alt="title">
-                            <p class="product-price">700</p>
-                            <p class="product-description hide">Riusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <span class="btn product-details">Details</span>
-                        </div>
-                        <div class="product">
-                            <h2>HP ZBook</h2>
-                            <img src="https://fbtech.7uptheme.net/wp-content/uploads/2017/09/fb-tech-laptop-05-258x172.png" alt="title">
-                            <p class="product-price">450</p>
-                            <p class="product-description hide">Riusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <span class="btn product-details">Details</span>
-                        </div>
-                    </div>
-                </div><!-- .page container -->
-        
-                <!-- modals -->
-                <div class="overlay hide"></div>
-        
-                <div class="login-modal modal hide">
-                    <div class="errors"></div>
-                    <span class="close">&#x2716;</span>
-                    <input type="text" class="username" placeholder="Username">
-                    <input type="password" class="password" placeholder="Password">
-                    <input type="submit" class="login" value="Log In">
-                    <p>username: f password: f </p>
-                </div>
-        
-                <div class="product-modal modal hide">
-                    <span class="close">&#x2716;</span>
-                </div>
-                
-                <div class="checkout-modal modal hide">
-                    <span class="close">&#x2716;</span>
-                    <p class="checkout-message">Cart is empty.</p>
-                    <div class="checkout-modal-title"></div>
-                    <div class="checkout-modal-total hide"></div>
-                    <span class="btn checkout-modal-pay hide">Pay</span>
-                </div>
-        
-            </div><!-- .main-container -->
-            <script>
-                // vars
-		let loginLink = document.getElementsByClassName('header-right-login')[0]
-		let logoutLink = document.getElementsByClassName('header-right-logout')[0]
-		let overlay = document.getElementsByClassName('overlay')[0]
-		let loginModal = document.getElementsByClassName('login-modal')[0]
-		let productModal = document.getElementsByClassName('product-modal')[0]
-		let checkoutModal = document.getElementsByClassName('checkout-modal')[0]
-		let checkoutModalTitle = checkoutModal.querySelector('.checkout-modal-title')
-		let checkoutModalTotal = checkoutModal.querySelector('.checkout-modal-total')
-        let payBtn = document.getElementsByClassName('checkout-modal-pay')[0]
-        let emptyCart = document.getElementsByClassName('checkout-message')[0]
-		let close = document.querySelectorAll('.close')
-		let errorsDiv = document.getElementsByClassName('errors')[0]
-		let productDetails = document.querySelectorAll('.product-details')
-        let cartItems = document.getElementsByClassName('header-right-items')[0]
-        let totalPrice = document.getElementsByClassName('header-right-price')[0]
-        let cartIcon = document.getElementsByClassName('header-right-text')[0]
-
-
-		// check if logged in
-		ishopObj = JSON.parse(localStorage.getItem('ishopKey'))
-		if (ishopObj !== null) {
-			if (ishopObj.logged_in == true) {
-				loginLink.classList.add('hide')
-				logoutLink.classList.remove('hide')
-			}
-		} else {
-			var ishopObj = {
-				logged_in: false
-			} 
-		}
-
-		// logout
-		logoutLink.addEventListener('click', function(){
-			if (confirm('Are you sure you want to logout?')) {
-				ishopObj = JSON.parse(localStorage.getItem('ishopKey'))
-				if (ishopObj !== null) {
-					ishopObj.logged_in = false
-				}
-				localStorage.setItem('ishopKey', JSON.stringify(ishopObj))
-
-				// reload page
-				location.reload()
-			} else {
-				return
-			}
-		})
-
-		// close modal 
-        close.forEach(function(el){
-            el.addEventListener('click', function(){
-                this.closest('.modal').classList.add('hide')
-			    overlay.classList.add('hide')
-
-                if (this.nextElementSibling.classList.contains('product')) {
-                    this.nextElementSibling.remove()
-                }
-            })
-        })
-
-		// open login modal
-		loginLink.addEventListener('click', function(){
-			overlay.classList.remove('hide')
-			loginModal.classList.remove('hide')
-
-			// clear the errors div
-			errorsDiv.innerHTML = ''
-
-			// process submit
-			document.getElementsByClassName('login')[0].addEventListener('click', function(){
-				// clear the errors div
-				errorsDiv.innerHTML = ''
-
-				// get username/pass values
-				let usernameVal = document.getElementsByClassName('username')[0].value
-				let passwordVal = document.getElementsByClassName('password')[0].value
-				let errors = []
-
-				// validation
-				if (usernameVal == '') { 
-					errors.push('username field can\'t be empty')
-				}
-				if (passwordVal == '') { 
-					errors.push('password field can\'t be empty')
-				}
-				if ((usernameVal != '' && passwordVal != '') && (usernameVal != 'f' || passwordVal != 'f')) {
-					errors.push('username/password incorrect')
-				}
-				if (usernameVal == 'f' && passwordVal == 'f') {
-					// login success : set logged_in property to true in ishopKey localStorage key
-					ishopObj = JSON.parse(localStorage.getItem('ishopKey'))
-					if (ishopObj !== null) {
-						ishopObj.logged_in = true
-					} else {
-						ishopObj = {
-							logged_in: true
-						}
-					}
-					localStorage.setItem('ishopKey', JSON.stringify(ishopObj))
-
-					// reload page
-					location.reload()
-				}
-				for (let i = 0; i < errors.length; i++) {
-					errorsDiv.innerHTML += '<p>' + errors[i] + '</p>'
-				}
-			})	
-		})
-
-        // open product modal
-        productDetails.forEach(function(el){
-            el.addEventListener('click', function(){
-                // get a reference to the clicked product
-                let currentProduct = this.closest('.product')
-                
-                // show the modal
-                overlay.classList.remove('hide')
-                productModal.classList.remove('hide')
-                
-                // clone product into modal
-                let cloned = currentProduct.cloneNode(true)
-                productModal.appendChild(cloned)
-
-                // hide produt details link
-                cloned.querySelector('.product-details').classList.add('hide')
-
-                // create produt add to cart link
-                cloned.innerHTML += '<span class="btn product-add-to-cart">Add to Cart</span>'
-
-                // show produt description
-                cloned.querySelector('.product-description').classList.remove('hide')
-
-                // add to cart functionalty
-                cloned.querySelector('.product-add-to-cart').addEventListener('click', function(){
-					// if not logged in show alert
-					if (!ishopObj.logged_in) {
-						alert('please log in to add items to cart')
-					} else {
-						// hide cart is empty text
-						emptyCart.classList.add('hide')
-
-						// show total
-						checkoutModalTotal.classList.remove('hide')
-
-						// update cart with one num
-						cartItems.innerHTML = parseInt(cartItems.innerHTML)+1
-
-						// update total price
-						let clonedPrice = cloned.querySelector('.product-price').innerHTML
-						totalPrice.innerHTML = parseInt(totalPrice.innerHTML)+parseInt(clonedPrice)
-
-						// add product info to checkout modal
-						// get title & price
-						let clonedTitle = cloned.querySelector('h2').innerHTML
-						// if checkout modal includes title string or not
-						if (!checkoutModal.innerHTML.includes(clonedTitle)) {
-							// add title to checkout modal
-							checkoutModalTitle.innerHTML += '<p>'+clonedTitle+'<span>'+clonedPrice+'</span></p>'
-							// add total
-							checkoutModalTotal.innerHTML = checkoutModalTotal.innerHTML || 0
-							checkoutModalTotal.innerHTML = parseInt(checkoutModalTotal.innerHTML)+parseInt(clonedPrice)
-							// show pay btn
-							payBtn.classList.remove('hide')
-							// show add to cart confirmation
-							alert('The item was added successfully')
-						} else {
-							alert('This item is already in the cart!')
-							// and reduce the cart itmes number by one and the price
-							cartItems.innerHTML = parseInt(cartItems.innerHTML)-1
-							totalPrice.innerHTML = parseInt(totalPrice.innerHTML)-parseInt(clonedPrice)
-						}
-					}
-                })
-				
-            })
-        })
-
-        // open checkout modal
-        cartIcon.addEventListener('click', function(){
-            checkoutModal.classList.remove('hide')
-            overlay.classList.remove('hide')
-        })
-
-		// pay
-		payBtn.addEventListener('click', function(){
-			if(confirm('Are you sure you want to pay?')){
-				checkoutModalTitle.innerHTML = ''
-				checkoutModalTotal.innerHTML = ''
-				this.classList.add('hide')
-				emptyCart.classList.remove('hide')
-				cartItems.innerHTML = '0'
-				totalPrice.innerHTML = '0'
-				checkoutModalTotal.classList.add('hide')
-			}
-		})
-            </script>
-
-            <%- include('./partials/footer')%>
-    </body>
+</body>	
+</html>

@@ -1,20 +1,36 @@
 const express = require("express");
 const router = express.Router();
+const path = require('path');
+
+const multer = require('multer');
+const almacenamiento = multer.diskStorage({//configuracion de la instancia
+    destination: function (req, file, cb) {
+      cb(null, path.resolve('public/images/')) //resolveme de ruta base
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
+    }
+  });
+  
+const upload = multer({ storage: almacenamiento })
+
+
 
 const productController =  require('../controllers/productController');
-
-router.get('/principal', productController.principal);
-router.get('/listado', productController.listado);
-router.get('/detalle', productController.detalle);
+router.get('/', productController.index)
+router.get('/create', productController.create);
+router.post('/', upload.single('image'), productController.store)
+router.get('/detail/:id', productController.detail);
 router.get('/armasCortas', productController.armasCortas);
 router.get('/armasLargas', productController.armasLargas);
 router.get('/camping', productController.camping);
-router.get('/tramites', productController.tramites);
-router.get('/municiones', productController.municiones);
-router.get('/createProduct', productController.createProduct);
-router.get('/productEdit', productController.productEdit);
-router.get('/productDetail', productController.productDetail);
-router.get('/productList', productController.productList);
+
+
+
+router.get('/:id/edit', productController.edit);
+router.put('/:id', productController.update);
+router.delete('/:id', productController.delete);
 router.get('/shoppingCart', productController.shoppingCart);
 
 

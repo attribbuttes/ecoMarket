@@ -1,11 +1,52 @@
-<%- include('./partials/head')%>
-<%- include('./partials/header')%>
-
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('partials/head', {title: '?'}) %>
 <body>
-    <h1>mi cuenta</h1>
-    
+	<!-- Header -->
+	<%- include('partials/header') %>
+	<!-- /Header -->
 
+	<!-- product detail -->
+	<div class="container products-wrapper">
+		<div class="row">
 
+			<div class="col-12">
+				<h2 class="products-title"><%= user.fullname %></h2>
+			</div>
+		</div>
+		<div class="product-detail">
+			<div class="row">
+				<div class="col-12 col-lg-8">
+					<img src="/images/user<%= user.image %>" alt="product image" class="product-detail-img">
+					<p class="product-detail-description">
+						<%= user.description %>					</p>
+				</div>
+				<div class="col-12 col-lg-4">
+					<article class="product-detail-info">
+						<h2 class="product-detail-title"><%= user.username %></h2>
+						
+							
 
-<%- include('./partials/footer')%>
-</body>
+						<a href="#" class="buy-now-button">editar informacion</a>
+						<hr>
+
+						<a href="/products/edit/¿?" class="action-button edit">EDITAR PRODUCTO</a>
+						<form action="/products/delete/¿¿" method="POST" style="display: inline-flex">
+							<button type="submit" class="action-button delete">ELIMINAR</button>
+						</form>
+					</article>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+	<!-- /product detail -->
+
+	<!-- footer -->
+	<%- include('partials/footer') %>
+	<!-- /footer -->
+
+</body>	
+</html>

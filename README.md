@@ -30,3 +30,6 @@ Resumen de entregables
 ○ Carrito de compras (productCart.html)
 ○ Formulario de registro (register.html)
 ○ Formulario de login (login.html)
+
+
+10/10 se instalo express-validator

@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "fullname": "persona nro 1 de base de datos",
+    "username": "persona nro 1 nombre de usauario",
+    "category": "male",
+    "description": "algo sobre mi",
+    "image": "image-1665345764761-596394877.jpg",
+    "mail": "sajhsajsjahsjash@gmail.com"
+  },
+  {
+    "fullname": "dasdasdas",
+    "username": "dasdasdas",
+    "mail": "dasdasd@gmail.com",
+    "sex": "male",
+    "description": "acerca de mi",
+    "image": "image-1665355000224-712741938.jfif",
+    "id": 2
+  },
+  {
+    "fullname": "dasdasdas",
+    "username": "dasdasdas",
+    "mail": "dasdasd@gmail.com",
+    "sex": "male",
+    "description": "acerca de mi",
+    "image": "image-1665355165413-298909690.jfif",
+    "id": 3
+  },
+  {
+    "fullname": "dasdasdas",
+    "username": "dasdasdas",
+    "mail": "dasdasd@gmail.com",
+    "sex": "male",
+    "description": "acerca de mi",
+    "image": "image-1665355173152-304602108.jfif",
+    "id": 4
+  },
+  {
+    "fullname": "dasdasdasd",
+    "username": "dasdsadsad",
+    "mail": "dasd@coomnahsj.com",
+    "sex": "woman",
+    "description": "fdsfsdf",
+    "image": "image-1665355421317-90977200.jfif",
+    "id": 5
+  },
+  {
+    "fullname": "dasdsd",
+    "username": "dasdsd",
+    "mail": "dadas@gmail.com",
+    "sex": "woman",
+    "description": "dasfdfsdf",
+    "image": "image-1665355667668-41259126.jfif",
+    "id": 6
+  }
+]
