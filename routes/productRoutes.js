@@ -18,6 +18,7 @@ const upload = multer({ storage: almacenamiento })
 
 
 const productController =  require('../controllers/productController');
+
 router.get('/', productController.index)
 router.get('/create', productController.create);
 router.post('/', upload.single('image'), productController.store)
@@ -29,7 +30,7 @@ router.get('/camping', productController.camping);
 
 
 router.get('/:id/edit', productController.edit);
-router.put('/:id', productController.update);
+router.put('/:id', upload.single('image'), productController.update);
 router.delete('/:id', productController.delete);
 router.get('/shoppingCart', productController.shoppingCart);
 

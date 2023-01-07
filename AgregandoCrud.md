@@ -320,3 +320,58 @@ ReferenceError: C:\Users\elect\Documents\PasadoDeCarpetaDigitalHouseDesdeCero\Pr
 ////////
 
 el crud esta agregado con exito, se guardan usarios y productos, se falla en mosttrar la pagina siguiente al guardado, en usuariios x q no se como redireccionar a un perfil de usuario con id y en produtos los mismo
+
+diciendo esto 
+    store: (req,res)=> {
+        res.send(req.body)
+    },
+
+req. body me envia toda la info q recibe desde el formulario:
+
+sin la imagen:
+
+{
+"fullname": "dsadasd",
+"username": "dasdas",
+"mail": "dasdasd",
+"sex": "male",
+"description": "dasdasd"
+}
+
+ahora recibo absolutamente toda la info
+  store: (req,res)=> {
+        res.send({
+            body: req.body,
+            file: req.file
+    });
+    },
+
+{
+"body": {
+"fullname": "dsadasd",
+"username": "fsdfsdf",
+"mail": "dasdasd@gmail.com",
+"password": "fafasf",
+"sex": "male",
+"description": "fsfsdf"
+},
+"file": {
+"fieldname": "image",
+"originalname": "palacioAguasArgFfJT2NXXwAEcLO2.jfif",
+"encoding": "7bit",
+"mimetype": "image/jpeg",
+"destination": "C:\\Users\\elect\\Documents\\PasadoDeCarpetaDigitalHouseDesdeCero\\Proyectos\\armeria\\public\\images\\user",
+"filename": "image-1665975281680-740711969.jfif",
+"path": "C:\\Users\\elect\\Documents\\PasadoDeCarpetaDigitalHouseDesdeCero\\Proyectos\\armeria\\public\\images\\user\\image-1665975281680-740711969.jfif",
+"size": 1917806
+}
+}
+revisar libreria de vbalidar
+validator.js
+
+````
+
+este acento accent grave alt 96
+
+https://github.com/javi-teaches/express-validator
+clase validator javio

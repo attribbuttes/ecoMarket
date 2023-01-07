@@ -6,47 +6,21 @@
 	<!-- Header -->
 	<%- include('partials/header') %>
 	<!-- /Header -->
-
-	<!-- product detail -->
-	<div class="container products-wrapper">
+	<!-- Container -->
+	<div class="container" style="margin-top: 40px;">
 		<div class="row">
-
-			<div class="col-12">
-				<h2 class="products-title"><%= user.fullname %></h2>
+			<div class="col-md-3">
+				<h2>Hi <%= user.name %> </h2>
+				<img src="/images/user/<%= user.image %> ">
+				<br>
+				<br>
+				<h2>hi <%= user.mail %> </h2>
+				<div class="alert alert-success"><%= user.email %> </div>
 			</div>
 		</div>
-		<div class="product-detail">
-			<div class="row">
-				<div class="col-12 col-lg-8">
-					<img src="/images/user<%= user.image %>" alt="product image" class="product-detail-img">
-					<p class="product-detail-description">
-						<%= user.description %>					</p>
-				</div>
-				<div class="col-12 col-lg-4">
-					<article class="product-detail-info">
-						<h2 class="product-detail-title"><%= user.username %></h2>
-						
-							
-
-						<a href="#" class="buy-now-button">editar informacion</a>
-						<hr>
-
-						<a href="/products/edit/¿?" class="action-button edit">EDITAR PRODUCTO</a>
-						<form action="/products/delete/¿¿" method="POST" style="display: inline-flex">
-							<button type="submit" class="action-button delete">ELIMINAR</button>
-						</form>
-					</article>
-				</div>
-				
-			</div>
-		</div>
-		
 	</div>
-	<!-- /product detail -->
-
-	<!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
-
-</body>	
+	<!-- //Container -->
+	
+	<%- include('partials/footer'); %>
+</body>
 </html>

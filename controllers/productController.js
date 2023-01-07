@@ -57,21 +57,45 @@ const productController = {
         return res.render('camping', {camping, allProducts}); 
     },
     edit: (req,res)=> {
-        return res.send('editar producto')
+        const productId = req.params.id;
+        const productToEdit = products.find((product) => product.id == productId)
+        if (!productToEdit){
+            return res.send('el producto no existe')
+        }
+        res.render('product-edit-form', { productToEdit})
+        
     },
-    update: (req,res)=> {
-        return res.send('actualizar')
-    },
+    update: (req, res) => {
+		// Do the magic
+
+		const productId = req.params.id;
+        const allProducts = products;
+		const indiceDelProducto = products.findIndex((product) => product.id == productId);
+        indiceDelProducto.price = Number(indiceDelProducto.price);
+        
+		products[indiceDelProducto] = {...products[indiceDelProducto], ...req.body}
+		//ssintaxis de fusion de 2 en 1
+		productController.guardarProductos();
+		return res.render('products', {allProducts});
+	},
     delete: (req,res)=> {
         return res.send('eliminar producto')
     },
 
+   
     shoppingCart: (req,res)=> {
         return res.send('ShioppingCart');
     },
     donde: (req,res)=> {
         return res.render('quienes')
     },            
+    guardarProductos(req, res){
+		fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2))
+	},//cuando uno guarda como stringfy si lo guardastre mal perdiste todo
+	asignarIdAProductoEnBaseAlUltimo(productToCreate) {
+		return products[products.length -1].id +1 ;
+		//stringify convierte a json, null y 2 es para formatearlo 
+	}//sume 1 numero al largo del array y doy id
 }
 
 module.exports=productController;

@@ -33,3 +33,7 @@ Resumen de entregables
 
 
 10/10 se instalo express-validator
+
+16-10 instalo ezxpress validator otra vez parece
+
+3-1 instalo sequelize

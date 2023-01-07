@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
-    "name": "Cafetera Moulinex Dolce Gusto Edited",
-    "price": 100,
-    "discount": 50,
-    "category": "armasCortas",
-    "description": "Cafetera Dolce Gusto Lumio. La cafetera Dolce Gusto Lumio es de variedad automática que ha llegado con un diseño radical al que nos tenía acostumbrados Dolce Gusto.En este post te contamos todo lo que necesitas saber sobre ella, desde sus características técnicas hasta la calidad de las cápsulas o price.",
+    "name": "arma corta editada",
+    "price": "100",
+    "discount": "50",
+    "category": "",
+    "description": "",
     "image": "1.jpg"
   },
   {
@@ -217,19 +217,19 @@
   },
   {
     "id": 25,
-    "name": "arma corta",
-    "price": 100,
-    "discount": 50,
-    "category": "armasCortas",
-    "description": "Cafetera Dolce Gusto Lumio. La cafetera Dolce Gusto Lumio es de variedad automática que ha llegado con un diseño radical al que nos tenía acostumbrados Dolce Gusto.En este post te contamos todo lo que necesitas saber sobre ella, desde sus características técnicas hasta la calidad de las cápsulas o price.",
+    "name": "arma corta editada",
+    "price": "100",
+    "discount": "50",
+    "category": "",
+    "description": "",
     "image": "1.jpg"
   },
   {
-    "name": "kit roni",
-    "price": 455665465,
-    "discount": 4456465456,
-    "category": "armasCortas",
-    "description": "kit roni",
+    "name": "kit roni nuevo",
+    "price": "455665465",
+    "discount": "15",
+    "category": "in-sale",
+    "description": "nuevo kit roni",
     "image": "image-1665285981750-55683649.jpg",
     "id": 26
   },
@@ -252,11 +252,11 @@
     "id": 28
   },
   {
-    "name": "4fsdfsdfsdfds",
-    "price": 555,
-    "discount": 4,
-    "category": "armasCortas",
-    "description": "fdfsdfsdfsdf",
+    "name": "nueva pistola editada",
+    "price": "555",
+    "discount": "4",
+    "category": "in-sale",
+    "description": "nueva pistola",
     "image": "image-1665343413053-655846117.jpg",
     "id": 29
   },
@@ -394,5 +394,32 @@
     "description": "",
     "image": "image-1665972442806-383633715.jfif",
     "id": 44
+  },
+  {
+    "name": "asdasd",
+    "price": null,
+    "discount": null,
+    "category": "in-sale",
+    "description": "",
+    "image": "image-1665972649592-311085848.jfif",
+    "id": 45
+  },
+  {
+    "name": "dasdasd",
+    "price": null,
+    "discount": null,
+    "category": "in-sale",
+    "description": "",
+    "image": "image-1665973119183-125398404.jfif",
+    "id": 46
+  },
+  {
+    "name": "dsafsdgsdfsdf",
+    "price": 55454544,
+    "discount": 11,
+    "category": "armasCortas",
+    "description": "daskdaskdjkdsahlkawds",
+    "image": "image-1668550311145-16037484.png",
+    "id": 47
   }
 ]

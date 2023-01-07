@@ -83,6 +83,18 @@ const userController = {
 
     login: (req,res)=> {
         return res.render('userRegisterLogin');
+
+        const usersInDB = users;
+        let errors = validationResult(req);
+        if (errors.isEmpty()){
+            const usersInDB = users;
+            if(usersInDB == '') {
+
+            }
+        }else{
+            return res.render('userRegisterLogin', {errors : errors.errors})//para q se comparta la variable los errores
+        }
+    },
     },
     donde: (req,res)=> {
         return res.render('quienes')
