@@ -26,6 +26,10 @@ router.get('/detail/:id', productController.detail);
 router.get('/solutions', productController.solutions);
 router.get('/ecosust', productController.ecosust);
 router.get('/outdoor', productController.outdoor);
+router.get('/organic', productController.organic);
+router.get('/cert', productController.cert);
+
+
 
 
 

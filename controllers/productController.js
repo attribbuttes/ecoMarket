@@ -56,6 +56,18 @@ const productController = {
         const camping = products.filter((product)=> product.category ==='camping')
         return res.render('outdoor', {camping, allProducts}); 
     },
+    cert: (req,res)=> {
+
+        const allProducts = products;
+        const camping = products.filter((product)=> product.category ==='camping')
+        return res.render('cert', {camping, allProducts}); 
+    },
+    organic: (req,res)=> {
+
+        const allProducts = products;
+        const camping = products.filter((product)=> product.category ==='camping')
+        return res.render('organic', {camping, allProducts}); 
+    },
     edit: (req,res)=> {
         const productId = req.params.id;
         const productToEdit = products.find((product) => product.id == productId)
