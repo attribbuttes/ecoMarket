@@ -38,23 +38,23 @@ const productController = {
 		return res.render ('detail', {product, discounted})
 	},
 
-    armasCortas: (req,res)=> {
+    solutions: (req,res)=> {
 
         const allProducts = products;
         const armasCortas = products.filter((product)=> product.category ==='armasCortas')
-        return res.render('armasCortas', {armasCortas, allProducts}); 
+        return res.render('solutions', {armasCortas, allProducts}); 
     },
-    armasLargas: (req,res)=> {
+    ecosust: (req,res)=> {
 
         const allProducts = products;
         const armasLargas = products.filter((product)=> product.category ==='armasLargas')
-        return res.render('armasLargas', {armasLargas, allProducts}); 
+        return res.render('ecosust', {armasLargas, allProducts}); 
     },
-    camping: (req,res)=> {
+    outdoor: (req,res)=> {
 
         const allProducts = products;
         const camping = products.filter((product)=> product.category ==='camping')
-        return res.render('camping', {camping, allProducts}); 
+        return res.render('outdoor', {camping, allProducts}); 
     },
     edit: (req,res)=> {
         const productId = req.params.id;

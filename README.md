@@ -1,11 +1,11 @@
-app web de armeria
+app web de un ecoMarket
 
 1. 
 github
-https://github.com/attribbuttes/armeria
+https://github.com/attribbuttes/ecoMarket
 
 2. 
-Armeria - cuchilleria - camping
+Soluciones empresariales ambientales
 
 3. 
 basada en paginas como:
@@ -37,3 +37,5 @@ Resumen de entregables
 16-10 instalo ezxpress validator otra vez parece
 
 3-1 instalo sequelize
+
+6/1/2023 REBRANDING ECO--MARKET

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-<%- include('partials/head', {title: '?'}) %>
+<%- include('partials/head', {title: 'solutions'}) %>
 <body>
 	<!-- Header -->
 	<%- include('partials/header') %>
@@ -11,9 +11,9 @@
 <div class="container products-wrapper">
     <div class="row">
         <div class="col-12">
-            <h2 class="products-title">Armas Largas</h2>
+            <h2 class="products-title">SOLUTIONS</h2>
         </div>
-        <% armasLargas.forEach(product => { %>
+        <% armasCortas.forEach(product => { %>
         <div class="col-12 col-sm-6 col-lg-3">
             <section class="product-box">
                 <a href="/products/detail/<%= product.id %> ">

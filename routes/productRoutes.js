@@ -23,9 +23,9 @@ router.get('/', productController.index)
 router.get('/create', productController.create);
 router.post('/', upload.single('image'), productController.store)
 router.get('/detail/:id', productController.detail);
-router.get('/armasCortas', productController.armasCortas);
-router.get('/armasLargas', productController.armasLargas);
-router.get('/camping', productController.camping);
+router.get('/solutions', productController.solutions);
+router.get('/ecosust', productController.ecosust);
+router.get('/outdoor', productController.outdoor);
 
 
 
