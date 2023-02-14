@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const path = require('path');
+const userController = require('../controllers/userController')
+
 
 const multer = require('multer');
 
@@ -46,11 +48,10 @@ const storage = multer.diskStorage({//configuracion de la instancia storage
   
 const upload = multer({ storage }) //instancia de multer, storage, si le pones otro nombre tiene q decir storage : lo q pusiste
 //multer espera un objeto q tenga storage
-const userController =  require('../controllers/userController');
 
 router.get('/', userController.index);
 
-router.get('/search', userController.search);
+/*router.get('/search', userController.search);
 
 router.get('/create', userController.create);
 router.post('/', upload.single('image'), validations, userController.store)//image etiqueta de foirmulario, 
@@ -68,6 +69,6 @@ router.get('/who', userController.quienes);
 router.get('/donde', userController.donde);
 router.get('/contacto', userController.contacto);
 
-
+*/
 
 module.exports = router;

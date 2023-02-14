@@ -1,17 +1,12 @@
-  <%- include('./partials/head')%>
 <%- include('./partials/header')%>
-
+  <%- include('./partials/head')%>
 
     <body>
-
-
 
       <!-- Slideshow container -->
       <header>
 
         
-<br>
-
         <div class="slideshow-container">
 
           <!-- Full-width images with number and caption text -->
@@ -79,36 +74,70 @@
           }
         </script>
 
-<div>
-  <!-- todos los productos -->
-<div class="container products-wrapper">
-  <div class="row">
-      <div class="col-12">
-          <h2 class="products-title">Todos los productos</h2>
-      </div>
-      <% products.forEach(product => { %>
-      <div class="col-12 col-sm-6 col-lg-3">
-          <section class="product-box">
-              <a href="/products/detail/<%= product.id %> ">
-                  <figure class="product-box_image">
-                      <img src="/images/<%= product.image %>" alt="imagen de producto">
-                  </figure>
-                  <article class="product-box_data">
-                      <h2>$<%= product.price %></h2>
-                      <% if (product.discount)  { %>
-                      <span><%= product.discount %>% OFF</span>
-                      <% } %>
-                      <p><%= product.title %></p>
-                      <i class="fas fa-truck"></i>
-                  </article>
-              </a>
-          </section>
-      </div>
-      <% }) %> 
-  </div>
-</div>
-
+       
       </header>
+       
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Basado en tu última visita</h2>
+			</div>-->
+			<% products.forEach(product => { %>
+				
+				<div class="col-12 col-sm-6 col-lg-3">
+					<section class="product-box">
+						<a href="/products/detail/<%= product.id %> ">
+							<figure class="product-box_image">
+								<img src="/images/<%= /*product.image*/ %>" alt="imagen de producto">
+							</figure>
+							<article class="product-box_data">
+								<h2>$<%= product.price %> </h2>
+								<% if (product.discount)  { %>
+								 
+								
+								<span><%= product.discount %> %OFF!! </span>
+								<% } %>
+								<p><%= product.title %> </p>
+								<i class="fas fa-truck"></i>
+							</article>
+						</a>
+					</section>
+				</div>
+			<% }) %> 
+			
+		</div>
+	</div>
+
+	 
+<!--
+   Ofertas -->
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Ofertas</h2>
+			</div>-->
+			<!-- Show the "in-sale" products -->
+			<% products.forEach(product => { %> <!--el product de las iteraciones sale de aca-->
+
+			<div class="col-12 col-sm-6 col-lg-3">
+				<section class="product-box">
+					<a href="/products/detail/<%= product.id %> ">
+						<figure class="product-box_image">
+							<img src="/images/<%= product.image %>" alt="imagen de producto">
+						</figure>
+						<article class="product-box_data">
+							<h2>$<%= product.price %> </h2>
+								<span><%=/* product.discount */%> %OFF!</span>
+								<p><%= product.title %> </p>
+							<i class="fas fa-truck"></i>
+						</article>
+					</a>
+				</section>
+			</div>
+			<% }) %>
+		</div>
+	</div>
+	<!-- /Ofertas -->
       <div>
         <%- include('./partials/footer')%>
       </div>

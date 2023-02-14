@@ -1,29 +1,30 @@
 const { check, validationResult, body } = require('express-validator')
+const db = require('../database/models')
 
 const fs = require('fs');
 const path = require('path');
 const bcryptjs = require('bcryptjs');
 
+const sequelize = db.sequelize;
+const { Op } = require("sequelize");
 
-
-const productsFilePath = path.join(__dirname,'../data/productsDataBase.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'))
-
-const usersFilePath = path.join(__dirname,'../data/userDataBase.json');
-const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'))
-
-
-
+const Genres = db.Genre;
+const Products = db.Product;
+const Customers = db.Customer;
 
 const userController = {
     index: (req,res)=> {
-        const inSaleProducts = products.filter((product)=> product.category === 'in-sale')
-        const visitedProducts = products.filter((product)=> product.category === 'visited')
-        return res.render('index', {inSaleProducts, visitedProducts}); 
+        db.Product.findAll()
+        .then(products => res.render('index', {products}))
+        .catch(err => {
+            res.send(err)
+        })
+        //return res.send('hola')
+//        return res.render('index', {products}); 
     },
-    create: (req,res)=> {
+    /*create: (req,res)=> {
         return res.render('userCreateForm');
-    },
+    },*/
 
    /* storeB: (req,res)=> {
         const validations = validationResult(req);
@@ -35,7 +36,7 @@ const userController = {
         }
         return res.send('ok las validaciones se pasaron y no hay errores')
     },*/
-
+/*
     store: (req,res)=> {
         const validations = validationResult(req);
         if(validations.errors.length > 0){ //validations en su propiedad errors, es un objeto
@@ -49,16 +50,16 @@ const userController = {
         userToCreate.image = req.file.filename; 
         userToCreate.id = usersInDB.length +1;
         usersInDB.push(userToCreate);
-        fs.writeFileSync(usersFilePath, JSON.stringify(usersInDB, null, 2))
+        fs.writeFileSync(usersFilePath, JSON.stringify(usersInDB, null, 2))*/
         //return res.send(userToCreate);
 
         //codigo del javii
-        if (validations.errors.length > 0) {
+      /*  if (validations.errors.length > 0) {
 			return res.render('userRegisterForm', {
 				errors: validations.mapped(),
 				oldData: req.body
 			});
-		}
+		}*/
 
 		/*let userInDB = User.findByField('email', req.body.email);
 
@@ -81,7 +82,7 @@ const userController = {
 
 		let userCreated = User.create(userTobeCreated);
 */
-		return res.redirect('/login');
+	/*	return res.redirect('/login');
     },
     
     session: (req,res) => {
@@ -90,7 +91,7 @@ const userController = {
         }
         req.session.numeroVisitas ++;
         res.send('session tiene el numero: ' + req.session.numeroVisitas)
-    },
+    },*/
     /*storeA: (req,res)=> {
         const usersInDB = users;
         const userToCreate = req.body; 
@@ -101,7 +102,7 @@ const userController = {
         return res.send('userInDb');
     },*/
 
-
+/*
 
     detail: (req, res) => {
 		const idToFind = req.params.id
@@ -158,14 +159,14 @@ const userController = {
 			}
 		});
 	},
-    
+    */
     /*
     armasCortas: (req,res)=> {
 
         const allProducts = products;
         const armasCortas = products.filter((product)=> product.category ==='armasCortas')
         return res.render('armasCortas', {armasCortas, allProducts}); 
-    },*/
+    },*//*
 
     donde: (req,res)=> {
         return res.render('who')
@@ -187,7 +188,7 @@ const userController = {
     userCreateForm: (req,res)=> {
         return res.render('userCreateForm')
     },
-        
+        */
     }
 
 module.exports=userController;

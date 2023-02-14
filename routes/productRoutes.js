@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const path = require('path');
+const productController = require('../controllers/productController')
 
+//multer
 const multer = require('multer');
-const almacenamiento = multer.diskStorage({//configuracion de la instancia
+const storage = multer.diskStorage({//configuracion de la instancia
     destination: function (req, file, cb) {
       cb(null, path.resolve('public/images/')) //resolveme de ruta base
     },
@@ -13,30 +15,30 @@ const almacenamiento = multer.diskStorage({//configuracion de la instancia
     }
   });
   
-const upload = multer({ storage: almacenamiento })
+const upload = multer({ storage })
+//end of multer
 
 
-
-const productController =  require('../controllers/productController');
-
-router.get('/', productController.index)
-router.get('/create', productController.create);
-router.post('/', upload.single('image'), productController.store)
+router.get('/', productController.list)
+router.get('/new', productController.new);
+router.get('/recomended', productController.recomended);
 router.get('/detail/:id', productController.detail);
+
+router.get('/create', upload.single('image'), productController.add)
+router.post('/create', upload.single('image'), productController.create)
+router.get('/edit/:id', productController.edit);
+router.post('/update/:id', productController.update);
+router.get('/delete/:id', productController.delete);
+router.post('/delete/:id', productController.destroy);
+
 router.get('/solutions', productController.solutions);
 router.get('/ecosust', productController.ecosust);
 router.get('/outdoor', productController.outdoor);
 router.get('/organic', productController.organic);
 router.get('/cert', productController.cert);
 
+//router.get('/shoppingCart', productController.shoppingCart);
 
-
-
-
-router.get('/:id/edit', productController.edit);
-router.put('/:id', upload.single('image'), productController.update);
-router.delete('/:id', productController.delete);
-router.get('/shoppingCart', productController.shoppingCart);
 
 
 

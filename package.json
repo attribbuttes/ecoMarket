@@ -1,7 +1,7 @@
 {
-  "name": "armeria",
+  "name": "marketApp",
   "version": "1.0.0",
-  "description": "app web de armeria",
+  "description": "marketApp",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
