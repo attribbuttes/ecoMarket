@@ -15,14 +15,14 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING(100),
             allowNull: false
         },
-        rating: {
+        /*rating: {
             type: dataTypes.INTEGER,
             allowNull: false,
             validate: {
               max: 100,
               min: 0
             }
-          },
+          },*/
     };
     let config = {
         tableName: 'generos',
@@ -30,7 +30,7 @@ module.exports = (sequelize, dataTypes) => {
         timestamps: true,
         createdAt: 'created_at',
         updatedAt: 'updated_at',
-        deletedAt: false
+        deletedAt: true
     }
     const Genre = sequelize.define(alias, cols, config);
 

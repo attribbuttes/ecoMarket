@@ -51,24 +51,22 @@ const upload = multer({ storage }) //instancia de multer, storage, si le pones o
 
 router.get('/', userController.index);
 
-/*router.get('/search', userController.search);
-
 router.get('/create', userController.create);
-router.post('/', upload.single('image'), validations, userController.store)//image etiqueta de foirmulario, 
-//name de image
+router.post('/create', upload.single('image'), validations, userController.store);
 
-router.get('/detail/:id', userController.detail)
-router.get('/session', userController.session)
-router.get('/:id/edit', userController.edit)
-router.put('/:id', userController.update)
-router.delete('/:id', userController.delete)
-router.get('/login', userController.login);
+router.get('/profile', authMiddleware, userController.profile); 
+ 
+router.get('/:id/edit', userController.edit) 
+router.put('/:id', userController.update) 
+
+router.get('/login', userController.login); 
 router.post('/login',userController.processLogin)
-router.get('/account/:id', userController.detail);
-router.get('/who', userController.quienes);
-router.get('/donde', userController.donde);
-router.get('/contacto', userController.contacto);
 
-*/
+//router.delete('/:id', userController.delete) 
+//router.get('/who', userController.quienes);
+//router.get('/donde', userController.donde);
+//router.get('/contacto', userController.contacto);
+//router.get('/search', userController.search);
+
 
 module.exports = router;

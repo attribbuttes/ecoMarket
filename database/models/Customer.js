@@ -8,28 +8,41 @@ module.exports = (sequelize, dataTypes) => {
         },
         // created_at: dataTypes.TIMESTAMP,
         // updated_at: dataTypes.TIMESTAMP,
-        first_name: {
+        full_name: {
             type: dataTypes.STRING(100),
             allowNull: false
         },
-        last_name: {
+        username: {
             type: dataTypes.STRING(100),
             allowNull: false
         },
-        rating: {
+        sex: {
             type: dataTypes.DECIMAL(3,1),
             allowNull: false
         },
-        fav_prod: {
-            type: dataTypes.BIGINT(10).UNSIGNED
+        email: {
+            type: dataTypes.STRING(100),
+            allowNull: false
         },
+        image: {
+            type: dataTypes.STRING(100),
+            allowNull: false
+        },
+        about: {
+            type: dataTypes.STRING(100),
+            allowNull: false
+        },
+        fav_prod: {
+            type: dataTypes.DECIMAL(3,1),
+            allowNull: false
+        }
     }
     let config = {
         tableName: 'clientes',
         timestamps: true,
         createdAt: 'created_at',
         updatedAt: 'updated_at',
-        deletedAt: false
+        deletedAt: true
     }
     const Customer = sequelize.define(alias, cols, config); 
 
@@ -38,9 +51,9 @@ module.exports = (sequelize, dataTypes) => {
           as: 'products',
           through: 'customer_products',
           otherKey: 'prod_id', //es al revez, es la relacion inversa a la tabla movie
-          foreignKey: 'cust_id', //x q en movie era lo contrario, es la relacion al revez
+          //foreignKey: 'cust_id', //x q en movie era lo contrario, es la relacion al revez
              //forein ki se refiere al modelo actor y other key al modelo movie
-          timestamps: false
+          timestamps: true
         });
     };
     

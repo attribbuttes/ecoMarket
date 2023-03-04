@@ -7,7 +7,7 @@ const productController = require('../controllers/productController')
 const multer = require('multer');
 const storage = multer.diskStorage({//configuracion de la instancia
     destination: function (req, file, cb) {
-      cb(null, path.resolve('public/images/')) //resolveme de ruta base
+      cb(null, path.resolve('public/images/products')) //resolveme de ruta base
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
@@ -21,7 +21,7 @@ const upload = multer({ storage })
 
 router.get('/', productController.list)
 router.get('/new', productController.new);
-router.get('/recomended', productController.recomended);
+//router.get('/recomended', productController.recomended);
 router.get('/detail/:id', productController.detail);
 
 router.get('/create', upload.single('image'), productController.add)

@@ -167,7 +167,7 @@ const productController = {
     },
 
     login: (req,res)=> {
-        return res.render('userRegisterLogin');
+        return res.render('login');
     },
     donde: (req,res)=> {
         return res.render('quienes')

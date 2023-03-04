@@ -8,7 +8,7 @@
 			</div>
 		</div>
 		<div class="col-12">
-			<form action="/" method="POST" enctype="multipart/form-data">
+			<form action="/create" method="POST" enctype="multipart/form-data">
 				<div class="row product-detail">
 					<div class="col-12 col-md-6">
 						<label for="image" class="form-label">Imagen de perfil</label>
@@ -22,9 +22,9 @@
 					</div>
 					<div class="col-12 col-md-6">
 						<label for="name" class="form-label">Nombre completo:</label>
-						<input type="text" id="name" name="name" placeholder="Fullname" class="form-input <%=locals.errors && errors.name ? 'is-invalid' : null  %>" value="<%= locals.old ? old.name  : null %>"> <!--la ionformacion de old y errors estan en el contoller-->
+						<input type="text" id="name" name="full_name" placeholder="Your full name" class="form-input <%=locals.errors && errors.full_name ? 'is-invalid' : null  %>" value="<%= locals.old ? old.full_name  : null %>"> <!--la ionformacion de old y errors estan en el contoller-->
 						
-						<% if (locals.errors && errors.name) { %>
+						<% if (locals.errors && errors.full_name) { %>
 							<div class="text-danger">
 								<%= errors.name.msg %> 
 							</div>
@@ -42,10 +42,10 @@
 					</div>
 					<div class="col-12 col-md-6">
 						<label for="mail" class="form-label">em@il:</label>
-						<input type="mail" id="mail" name="mail" placeholder=your@email.com class="form-input <%=locals.errors && errors.mail ? 'is-invalid' : null  %> " value="<%= locals.old ? old.mail  : null %>">
-						<% if (locals.errors && errors.mail) { %>
+						<input type="mail" id="mail" name="email" placeholder=your@email.com class="form-input <%=locals.errors && errors.email ? 'is-invalid' : null  %> " value="<%= locals.old ? old.email  : null %>">
+						<% if (locals.errors && errors.email) { %>
 							<div class="text-danger">
-								<%= errors.mail.msg %> 
+								<%= errors.email.msg %> 
 							</div>
 						<% } %>
 					</div>
@@ -63,7 +63,7 @@
 						<select name="sex" id="sex" class="form-input <%=locals.errors && errors.sex ? 'is-invalid' : null  %> " >
 							<option value="">choose one</option>
 							<% 
-								let sex_options = ['male', 'woman', 'other', 'bot']
+								let sex_options = ['male', 'woman', 'other', 'bot', 'argentino']
 							%> 
 							<% for (const onesex of sex_options) { %>
 								<option value="<%= onesex %>"<%= locals.old && (onesex === old.sex) ? 'selected' : null %>  ><%=onesex  %> </option>
@@ -75,9 +75,10 @@
 							</div>
 						<% } %>
 					</div>
+					
 					<div class="col-12">
 						<label for="description" class="form-label">algo sobre ti? about you?</label>
-						<textarea name="description" id="description" class="form-input"></textarea>
+						<textarea name="about" id="description" class="form-input"></textarea>
 					</div>
 					<div class="col-12">
 						<button type="submit" class="buy-now-button">Guardar usuario!</button>

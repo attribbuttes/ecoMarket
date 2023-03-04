@@ -19,176 +19,157 @@ const userController = {
         .catch(err => {
             res.send(err)
         })
-        //return res.send('hola')
-//        return res.render('index', {products}); 
     },
-    /*create: (req,res)=> {
+    create: (req,res)=> {
         return res.render('userCreateForm');
-    },*/
+    },
+    store: async (req, res) => {
+      const resultValidation = validationResult(req);
+    
+      if (resultValidation.errors.length > 0) {
+        return res.render('userCreateForm', {
+          errors: resultValidation.mapped(),
+          oldData: req.body,
+        });
+      }
+    
+      // Check if the email is already registered
+      let userInDB = await Customer.findOne({
+        where: {
+          email: req.body.email,
+        },
+      });
+    
+      if (userInDB) {
+        return res.render('userCreateForm', {
+          errors: {
+            email: {
+              msg: "This email is already registered",
+            },
+          },
+          oldData: req.body,
+        });
+      }
+    
+      // Create the user
+      const userToCreate = {
+        full_name: req.body.name,
+        email: req.body.email,
+        pass: bcryptjs.hashSync(req.body.password, 10),
+        image: req.file.filename,
+        username: req.body.username,
+        about: req.body.about,
+        sex: req.body.sex
+      };
+    console.log(userToCreate);
 
-   /* storeB: (req,res)=> {
-        const validations = validationResult(req);
-        if(validations.errors.length > 0){ //validations en su propiedad errors, es un objeto
-            return res.render('userCreateForm', {
-                errors: validations.mapped(),//convierte el array a un objeto literal con claves valores donde cada input es un objeto
-                old: req.body //copia del body para persistir datos
-            });
-        }
-        return res.send('ok las validaciones se pasaron y no hay errores')
-    },*/
-/*
-    store: (req,res)=> {
-        const validations = validationResult(req);
-        if(validations.errors.length > 0){ //validations en su propiedad errors, es un objeto
-            return res.render('userCreateForm', {
-                errors: validations.mapped(),//convierte el array a un objeto literal con claves valores donde cada input es un objeto
-                old: req.body //copia del body para persistir datos
-            });
-        }
-        const usersInDB = users;
-        const userToCreate = req.body; 
-        userToCreate.image = req.file.filename; 
-        userToCreate.id = usersInDB.length +1;
-        usersInDB.push(userToCreate);
-        fs.writeFileSync(usersFilePath, JSON.stringify(usersInDB, null, 2))*/
-        //return res.send(userToCreate);
+      try {
+        await Customer.create(userToCreate);
+        console.log('Creating user:', userToCreate);
 
-        //codigo del javii
-      /*  if (validations.errors.length > 0) {
-			return res.render('userRegisterForm', {
-				errors: validations.mapped(),
-				oldData: req.body
-			});
-		}*/
-
-		/*let userInDB = User.findByField('email', req.body.email);
-
-		if (userInDB) {
-			return res.render('userRegisterForm', {
-				errors: {
-					email: {
-						msg: 'Este email ya está registrado'
-					}
-				},
-				oldData: req.body
-			});
-		}
-
-		let userTobeCreated = {
-			...req.body,
-			password: bcryptjs.hashSync(req.body.password, 10),
-			avatar: req.file.filename
-		}
-
-		let userCreated = User.create(userTobeCreated);
-*/
-	/*	return res.redirect('/login');
+        return res.render('/login');
+      } catch (error) {
+        console.error(error);
+        return res.render('userCreateForm', {
+          errors: {
+            email: {
+              msg: "An error occurred while trying to register the user",
+            },
+          },
+          oldData: req.body,
+        });
+      }
     },
     
-    session: (req,res) => {
-        if (req.session.numeroVisitas== undefined) {
-            req.session.numeroVisitas = 0;
-        }
-        req.session.numeroVisitas ++;
-        res.send('session tiene el numero: ' + req.session.numeroVisitas)
-    },*/
-    /*storeA: (req,res)=> {
-        const usersInDB = users;
-        const userToCreate = req.body; 
-        userToCreate.image = req.file.filename; 
-        userToCreate.id = usersInDB.length +1;
-        usersInDB.push(userToCreate);
-        fs.writeFileSync(usersFilePath, JSON.stringify(usersInDB, null, 2))
-        return res.send('userInDb');
-    },*/
-
-/*
-
-    detail: (req, res) => {
-		const idToFind = req.params.id
-        const user = users.find (p => p.id == idToFind)
-		return res.render ('userAccount', {user})
-	
-	},
-    edit: (req,res)=> {
-        return res.send('detalles')
-    },
-    update: (req,res)=> {
-        return res.send('detalles')
-    },
-    delete: (req,res)=> {
-        return res.send('detalles')
-    },
-
-    login: (req,res)=> {
-        return res.render('login');
-    },
-
-    processLogin: (req, res) => {
-
+    
+    profile: (req, res) => {
         
-        const userToLogin = users.filter((user)=> user.email === req.body.email);
+        res.render('userAccount', {
+          Customers: req.session.userLogged,
+        });
+    },
+    edit: async (req, res) => {
+        const idUser = req.params.id;
         
-        if(userToLogin) {
+        const userToEdit = await Customers.findByPk(idUser,{
+            include: {
+                all: true
+            }
+        });
+        const datosParaVista = {
+            Customers: userToEdit
+          }
+          res.render("userAccount", datosParaVista);
+  },
+  update: async (req, res) => {
+    const idUser = req.params.id;
+    const editedUser = req.body;
+    const userToEdit = await Customers.findByPk(idUser);
 
+    //FILE 
+    console.log("file->",req.file);
+    //FILE
+
+    userToEdit.nombre = editedUser.nombre;
+    userToEdit.apellido = editedUser.apellido;
+    userToEdit.email = editedUser.email;
+
+    if(req.file) {
+        userToEdit.image = "/images/usuarios/" + req.file.filename;
+    }
+    
+    await userToEdit.save();
+    // await User.update(req.body, {
+    //   where: {
+    //     idUser: idUser
+    //   }
+    // });
+    const usuarioActualizado = await Customers.findByPk(idUser);
+
+    res.render('login', { Customers: usuarioActualizado });
+  },
+
+  login: (req, res) => {
+    return res.render('login');
+  },
+
+  processLogin: async (req, res) => {
+    let userToLogin = await Customers.findOne({
+        where: {
+            email: req.body.email,
+        },
+    });
+
+    if (userToLogin) {
         let isOkThePassword = bcryptjs.compareSync(req.body.password, userToLogin.password);
-			if (isOkThePassword) {
-				delete userToLogin.password;
-				req.session.userLogged = userToLogin;
 
-				if(req.body.remember_user) {
-					res.cookie('email', req.body.email, { maxAge: (1000 * 60) * 60 })
-				}
+        if (isOkThePassword) {
+            delete userToLogin.password;
 
-				return res.redirect('userAccount');
-			} 
-			return res.render('login', {
-				errors: {
-					email: {
-						msg: 'Las credenciales son inválidas'
-					}
-				}
-			});
-		}
+            if (req.body.remember_user) {
+                res.cookie("userEmail", req.body.email, { maxAge: 1000 * 60 * 100 });
+            }
 
-		return res.render('login', {
-			errors: {
-				email: {
-					msg: 'No se encuentra este email en nuestra base de datos'
-				}
-			}
-		});
-	},
-    */
-    /*
-    armasCortas: (req,res)=> {
+            req.session.userLogged = userToLogin;
+            return res.redirect("userAccount");
+        }
+    }
 
-        const allProducts = products;
-        const armasCortas = products.filter((product)=> product.category ==='armasCortas')
-        return res.render('armasCortas', {armasCortas, allProducts}); 
-    },*//*
+    return res.render("login", {
+        errors: {
+            email: {
+                msg: "los datos son incorrectos",
+            },
+        },
+    });
+},
+  logout: (req, res) => {
+    res.clearCookie("userEmail", { path: "/" }); //si no destruis la cookie quedas logueado por el tiempo de ejecucion de maxage
+    req.session.destroy(); // borra todos los datos de session
+    return res.redirect("/"); // y te redirije al home
+  },
 
-    donde: (req,res)=> {
-        return res.render('who')
-    },
-
-    search: (req,res)=> {
-        return res.send('search')
-    },
-    quienes: (req,res)=> {
-        return res.render('who')
-    },
-    contacto: (req,res)=> {
-        return res.render('who')
-    },
-    contacto: (req,res)=> {
-        return res.send('busqueda')
-    },
-
-    userCreateForm: (req,res)=> {
-        return res.render('userCreateForm')
-    },
-        */
+  
     }
 
 module.exports=userController;

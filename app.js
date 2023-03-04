@@ -11,7 +11,12 @@ const methodOverride = require('method-override');// modulo 5 express clase 22
 app.use(methodOverride('_method')); // modulo 5 express clase 22 // para poder hacer patch, configuracion put delete, cambia el POST
 
 app.use( express.static(publicPath) ) //le estoy diciendo q esto es public
-app.use(session({secret: 'secreto'}))
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true
+  }));
+  
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
