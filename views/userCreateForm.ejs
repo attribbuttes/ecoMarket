@@ -12,7 +12,7 @@
 				<div class="row product-detail">
 					<div class="col-12 col-md-6">
 						<label for="image" class="form-label">Imagen de perfil</label>
-						<input type="file" accept="image/*" id="image" name="image" class="form-input">
+						<input type="file" accept="image" id="image" name="image" class="form-input">
 						<% if (locals.errors && errors.image) { %>
 							<div class="text-danger">
 								<%= errors.image.msg %> 
@@ -26,7 +26,7 @@
 						
 						<% if (locals.errors && errors.full_name) { %>
 							<div class="text-danger">
-								<%= errors.name.msg %> 
+								<%= errors.full_name.msg %> 
 							</div>
 						<% } %>
 						
@@ -42,7 +42,7 @@
 					</div>
 					<div class="col-12 col-md-6">
 						<label for="mail" class="form-label">em@il:</label>
-						<input type="mail" id="mail" name="email" placeholder=your@email.com class="form-input <%=locals.errors && errors.email ? 'is-invalid' : null  %> " value="<%= locals.old ? old.email  : null %>">
+						<input type="mail" id="mail" name="email" placeholder="your@email.com" class="form-input <%=locals.errors && errors.email ? 'is-invalid' : null  %> " value="<%= locals.old ? old.email  : null %>">
 						<% if (locals.errors && errors.email) { %>
 							<div class="text-danger">
 								<%= errors.email.msg %> 
@@ -78,7 +78,7 @@
 					
 					<div class="col-12">
 						<label for="description" class="form-label">algo sobre ti? about you?</label>
-						<textarea name="about" id="description" class="form-input"></textarea>
+						<textarea name="text" id="description" class="form-input"></textarea>
 					</div>
 					<div class="col-12">
 						<button type="submit" class="buy-now-button">Guardar usuario!</button>

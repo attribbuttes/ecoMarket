@@ -4,17 +4,21 @@ module.exports = (sequelize, dataTypes) => {
         id: {
             type: dataTypes.BIGINT(10).UNSIGNED,
             primaryKey: true,
-            autoIncrement: true
-        },
-        // created_at: dataTypes.TIMESTAMP,
-        // updated_at: dataTypes.TIMESTAMP,
+            allowNull: false,
+            autoIncrement: true,
+            unique: true,
+            field: 'id',
+            autoIncrementIdentity: true
+                },
         full_name: {
             type: dataTypes.STRING(100),
-            allowNull: false
+            allowNull: false,
+            field: 'full_name'
         },
         username: {
             type: dataTypes.STRING(100),
-            allowNull: false
+            allowNull: false,
+            field: 'username'
         },
         sex: {
             type: dataTypes.DECIMAL(3,1),
@@ -28,21 +32,27 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING(100),
             allowNull: false
         },
-        about: {
+        text: {
             type: dataTypes.STRING(100),
             allowNull: false
         },
-        fav_prod: {
+        password: {
+            type: dataTypes.STRING(255),
+            allowNull: false,
+            field: 'password'
+          },
+        /*fav_prod: {
             type: dataTypes.DECIMAL(3,1),
             allowNull: false
-        }
+        }*/
     }
     let config = {
         tableName: 'clientes',
         timestamps: true,
         createdAt: 'created_at',
         updatedAt: 'updated_at',
-        deletedAt: true
+        deletedAt: false,
+        paranoid: false
     }
     const Customer = sequelize.define(alias, cols, config); 
 
