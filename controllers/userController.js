@@ -50,14 +50,7 @@ store: async (req, res) => {
 },
 
    
-    profile: (req, res) => {
-      Customers.findByPk(req.params.id)
-          .then(customer => {
-              res.render('profile', { customer });
-          });
-
-          console.log({customer})
-  },
+    
     
     /*
         profile: (req, res) => {
@@ -111,7 +104,7 @@ store: async (req, res) => {
     return res.render('login');
   },
 
-  processLogin: async (req, res) => {
+  /*processLogin: async (req, res) => {
     let userToLogin = await Customers.findOne({
         where: {
             email: req.body.email,
@@ -119,7 +112,9 @@ store: async (req, res) => {
     });
 
     if (userToLogin) {
-        let isOkThePassword = await bcrypt.compare(req.body.password, userToLogin.password);
+      //return res.send(userToLogin) cuando escribis esto ves el objeto en la web
+      
+        let isOkThePassword = await bcrypt.compare(req.body.password, userToLogin.password); //el 2ndo parametro es el password hasheado, bcrypt recibe ambos parametros uy los compara
 
         if (isOkThePassword) {
             delete userToLogin.password;
@@ -140,7 +135,53 @@ store: async (req, res) => {
             },
         },
     });
+},*/
+
+processLogin: async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.render("login", {
+      errors: [{
+        msg: "Debe completar los campos de email y contraseña",
+      }],
+    });
+  }
+
+  let userToLogin = await Customers.findOne({
+    where: {
+      email: email,
+    },
+  });
+
+  if (userToLogin) {
+    let isOkThePassword = await bcrypt.compare(password, userToLogin.password);
+
+    if (isOkThePassword) {
+      delete userToLogin.password;
+
+      if (req.body.remember_user) {
+        res.cookie("userEmail", email, { maxAge: 1000 * 60 * 100 });
+      }
+
+      req.session.userLogged = userToLogin; //userLogged se genera aca
+      return res.render("userAccount", { customer: userToLogin });
+    }
+  }
+
+  return res.render("login", {
+    errors: [{
+      msg: "Los datos son incorrectos",
+    }],
+  });
 },
+profile: (req, res) => {
+  console.log(req.session.userLogged)
+  const customer = req.session.userLogged
+         return res.render('userAccount', {customer});
+     
+      
+},
+
 
   logout: (req, res) => {
     res.clearCookie("userEmail", { path: "/" }); //si no destruis la cookie quedas logueado por el tiempo de ejecucion de maxage

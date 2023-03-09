@@ -1,10 +1,10 @@
 const express = require ('express');
 const app = express();
 const path = require('path')
+const session = require('express-session')
 
 
 const publicPath= path.resolve(__dirname, './public');  
-const session = require('express-session')
 app.use(express.urlencoded({extended:false})); //para poder recibir al informacion del formulario en valor post para hacer POST en req.body middleware seguridad de apliocacion modulo 5 clase 22
 app.use(express.json()); //seguridad de apliocacion modulo 5 clase 22
 const methodOverride = require('method-override');// modulo 5 express clase 22

@@ -14,7 +14,7 @@
 						<label for="image" class="form-label">Imagen de perfil</label>
 						<input type="file" accept="image" id="image" name="image" class="form-input">
 						<% if (locals.errors && errors.image) { %>
-							<div class="text-danger">
+							<div class="invalid-feedback">
 								<%= errors.image.msg %> 
 							</div>
 						<% } %>   
@@ -25,7 +25,7 @@
 						<input type="text" id="name" name="full_name" placeholder="Your full name" class="form-input <%=locals.errors && errors.full_name ? 'is-invalid' : null  %>" value="<%= locals.old ? old.full_name  : null %>"> <!--la ionformacion de old y errors estan en el contoller-->
 						
 						<% if (locals.errors && errors.full_name) { %>
-							<div class="text-danger">
+							<div class="invalid-feedback">
 								<%= errors.full_name.msg %> 
 							</div>
 						<% } %>
@@ -35,7 +35,7 @@
 						<label for="username" class="form-label">Nombre de usuario:</label>
 						<input type="text" id="username" name="username" placeholder="Username" class="form-input <%=locals.errors && errors.username ? 'is-invalid' : null  %> " value="<%= locals.old ? old.username  : null %>">
 						<% if (locals.errors && errors.username) { %>
-							<div class="text-danger">
+							<div class="invalid-feedback">
 								<%= errors.username.msg %> 
 							</div>
 						<% } %>
@@ -44,7 +44,7 @@
 						<label for="mail" class="form-label">em@il:</label>
 						<input type="mail" id="mail" name="email" placeholder="your@email.com" class="form-input <%=locals.errors && errors.email ? 'is-invalid' : null  %> " value="<%= locals.old ? old.email  : null %>">
 						<% if (locals.errors && errors.email) { %>
-							<div class="text-danger">
+							<div class="invalid-feedback">
 								<%= errors.email.msg %> 
 							</div>
 						<% } %>
@@ -53,7 +53,7 @@
 						<label for="password" class="form-label">Password:</label>
 						<input type="password" id="password" name="password" placeholder="password" class="form-input <%=locals.errors && errors.password ? 'is-invalid' : null  %> ">
 						<% if (locals.errors && errors.password) { %>
-							<div class="text-danger">
+							<div class="invalid-feedback">
 								<%= errors.password.msg %> 
 							</div>
 						<% } %>
@@ -70,7 +70,7 @@
 							<% } %>
 						</select>
 						<% if (locals.errors && errors.sex) { %>
-							<div class="text-danger">
+							<div class="invalid-feedback">
 								<%= errors.sex.msg %> 
 							</div>
 						<% } %>

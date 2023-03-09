@@ -12,14 +12,14 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 
 const validations = [
-  body ('name').notEmpty().withMessage('plese type your name'), 
+  body ('fullname').notEmpty().withMessage('plese type your name'), 
   body ('username').notEmpty().withMessage('please type a username'),
-  body ('mail')
+  body ('email')
   .notEmpty().withMessage('we need a valid mail').bail() //bail significa q si hay un error anterior corte directo
   .isEmail().withMessage('mail format must be name@server.com'),
   body ('password').notEmpty().withMessage('select a password'), 
   body ('sex').notEmpty().withMessage('select an orientation'), 
-  body ('image').custom((value, {req}) => {
+  body ('filename').custom((value, {req}) => {
     let file = req.file;
     let acceptedExtensions = ['.jpg', '.jfif', '.png' ];
 
@@ -51,16 +51,16 @@ const upload = multer({ storage }) //instancia de multer, storage, si le pones o
 
 router.get('/', userController.index);
 
-router.get('/create', userController.create);
+router.get('/create', guestMiddleware, userController.create);
 router.post('/create', upload.single('image'), validations, userController.store);
 
-router.get('/profile', authMiddleware, userController.profile); 
+router.get('/profile', userController.profile); 
  
 router.get('/:id/edit', userController.edit) 
 router.put('/:id', userController.update) 
 
-router.get('/login', userController.login); 
-router.post('/login',userController.processLogin)
+router.get('/login', guestMiddleware, userController.login); 
+router.post('/login', userController.processLogin)
 
 //router.delete('/:id', userController.delete) 
 //router.get('/who', userController.quienes);
