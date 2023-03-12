@@ -106,7 +106,7 @@ store: async (req, res) => {
     return res.render('login');
   },
 
-  /*processLogin: async (req, res) => {
+  processLogin: async (req, res) => {
     let userToLogin = await Customers.findOne({
         where: {
             email: req.body.email,
@@ -120,13 +120,14 @@ store: async (req, res) => {
 
         if (isOkThePassword) {
             delete userToLogin.password;
+            req.session.userLogged = userToLogin
 
-            if (req.body.remember_user) {
+            /*if (req.body.remember_user) {
                 res.cookie("userEmail", req.body.email, { maxAge: 1000 * 60 * 100 });
-            }
+            }*/
 
-            req.session.userLogged = userToLogin;
-            return res.render('userAccount', {customer : userToLogin,});
+            
+            return res.redirect('/profile'/*, {customer : userToLogin,}*/);
         }
     }
 
@@ -137,24 +138,11 @@ store: async (req, res) => {
             },
         },
     });
-},*/
+},
 
-processLogin: async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.render("login", {
-      errors: [{
-        msg: "Debe completar los campos de email y contraseña",
-      }],
-    });
-  }
-
-  let userToLogin = await Customers.findOne({
-    where: {
-      email: email,
-    },
-  });
-
+/*processLogin: async (req, res) => {
+  let userToLogin = await Customers.findByField('email', req.body.email);
+   
   if (userToLogin) {
     let isOkThePassword = await bcrypt.compare(password, userToLogin.password);
 
@@ -176,7 +164,7 @@ processLogin: async (req, res) => {
       msg: "Los datos son incorrectos",
     }],
   });
-},
+},*/
 profile: (req, res) => {
   console.log(req.session.userLogged)
   
