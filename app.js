@@ -2,21 +2,25 @@ const express = require ('express');
 const app = express();
 const path = require('path')
 const session = require('express-session')
+const userLoggedMiddleware = require ('./middlewares/userLoggedMiddleware')
 
-
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+  }));
+  
+app.use(userLoggedMiddleware)
 const publicPath= path.resolve(__dirname, './public');  
+
 app.use(express.urlencoded({extended:false})); //para poder recibir al informacion del formulario en valor post para hacer POST en req.body middleware seguridad de apliocacion modulo 5 clase 22
 app.use(express.json()); //seguridad de apliocacion modulo 5 clase 22
 const methodOverride = require('method-override');// modulo 5 express clase 22
 app.use(methodOverride('_method')); // modulo 5 express clase 22 // para poder hacer patch, configuracion put delete, cambia el POST
 
 app.use( express.static(publicPath) ) //le estoy diciendo q esto es public
-app.use(session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: true
-  }));
-  
+
+
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));

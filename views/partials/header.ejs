@@ -1,8 +1,16 @@
 <header>
     <nav class="navbar">
         <a href="/">HOME</a>
-        <a href="/create">CREATE ACCOUNT</a>
-        <a href="/profile">MI CUENTA</a>
+        <% if (locals.isLogged) { %>
+
+          <a href="/profile">MI CUENTA</a>
+          <a href="/logout">LOGOUT</a>
+        
+        <% } else { %>
+          <a href="/create">CREATE ACCOUNT</a>
+          <a href="/login">LOGUEARSE</a>
+        
+        <% } %>
 
         <div class="dropdown">
           <button onclick='location.href="/products"' class="dropbtn">SERVICES
@@ -17,7 +25,7 @@
             <a href="/products">ALL</a>    
             </div>
         </div>
-        <a href="/login">LOGUEARSE</a>
+        
 
     </nav>
 </header>

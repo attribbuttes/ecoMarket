@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
+const upload = require('../middlewares/multer')
+
 
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
@@ -162,8 +164,9 @@ processLogin: async (req, res) => {
       if (req.body.remember_user) {
         res.cookie("userEmail", email, { maxAge: 1000 * 60 * 100 });
       }
-
+      
       req.session.userLogged = userToLogin; //userLogged se genera aca
+     // req.session.userLogged = true;
       return res.render("userAccount", { customer: userToLogin });
     }
   }
@@ -176,15 +179,16 @@ processLogin: async (req, res) => {
 },
 profile: (req, res) => {
   console.log(req.session.userLogged)
-  const customer = req.session.userLogged
-         return res.render('userAccount', {customer});
+  
+//  req.session.userLogged = true;
+         return res.render('userAccount', {customer : req.session.userLogged});
      
       
 },
 
 
   logout: (req, res) => {
-    res.clearCookie("userEmail", { path: "/" }); //si no destruis la cookie quedas logueado por el tiempo de ejecucion de maxage
+    
     req.session.destroy(); // borra todos los datos de session
     return res.redirect("/"); // y te redirije al home
   },

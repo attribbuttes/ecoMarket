@@ -9,6 +9,7 @@ const multer = require('multer');
 const { check, validationResults, body } = require('express-validator'); 
 const guestMiddleware = require('../middlewares/guestMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
+const userLoggedMiddleware = require("../middlewares/userLoggedMiddleware");
 
 
 const validations = [
@@ -54,14 +55,17 @@ router.get('/', userController.index);
 router.get('/create', guestMiddleware, userController.create);
 router.post('/create', upload.single('image'), validations, userController.store);
 
-router.get('/profile', userController.profile); 
+
  
 router.get('/:id/edit', userController.edit) 
-router.put('/:id', userController.update) 
+router.put('/:id', userController.update)  
 
 router.get('/login', guestMiddleware, userController.login); 
 router.post('/login', userController.processLogin)
 
+router.get('/profile', authMiddleware, userController.profile);
+
+router.get('/logout', userController.logout )
 //router.delete('/:id', userController.delete) 
 //router.get('/who', userController.quienes);
 //router.get('/donde', userController.donde);
