@@ -5,7 +5,10 @@
 
           <a href="/profile">MI CUENTA</a>
           <a href="/logout">LOGOUT</a>
-        
+          <a href="">hi <%= locals.userLogged.full_name %></a>
+          <img src="/images/user/<%= locals.userLogged.image %>" style="width:30px;height:auto;" alt="">
+          
+
         <% } else { %>
           <a href="/create">CREATE ACCOUNT</a>
           <a href="/login">LOGUEARSE</a>
@@ -25,7 +28,6 @@
             <a href="/products">ALL</a>    
             </div>
         </div>
-        
 
     </nav>
 </header>

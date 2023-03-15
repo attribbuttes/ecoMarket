@@ -3,12 +3,16 @@ const app = express();
 const path = require('path')
 const session = require('express-session')
 const userLoggedMiddleware = require ('./middlewares/userLoggedMiddleware')
+const cookies = require('cookie-parser')
+
+
 
 app.use(session({
     secret: 'secret',
     resave: false,
     saveUninitialized: false
   }));
+app.use(cookies())
   
 app.use(userLoggedMiddleware)
 const publicPath= path.resolve(__dirname, './public');  

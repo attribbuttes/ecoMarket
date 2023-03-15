@@ -1,4 +1,3 @@
-const { check, validationResult, body } = require('express-validator')
 const db = require('../database/models')
 
 const fs = require('fs');
@@ -13,8 +12,7 @@ const upload = require('../middlewares/multer')
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
 
-const Genres = db.Genre;
-const Products = db.Product;
+
 const Customers = db.Customer;
 
 const userController = {
@@ -26,6 +24,7 @@ const userController = {
         })
     },
     create: (req,res)=> {
+      res.cookie('testing', 'hola mundo', {maxAge: 100*30})
         return res.render('userCreateForm');
     },
 
@@ -50,17 +49,7 @@ store: async (req, res) => {
     res.status(500).send(err);
   }
 },
-
    
-    
-    
-    /*
-        profile: (req, res) => {
-        
-        res.render('userAccount', {
-          Customers: req.session.userLogged,
-        });
-    },*/
     edit: async (req, res) => {
         const idUser = req.params.id;
         
@@ -103,7 +92,8 @@ store: async (req, res) => {
   },
 
   login: (req, res) => {
-    return res.render('login');
+    console.log(req.cookies.testing)
+      return res.render('login');
   },
 
   processLogin: async (req, res) => {
@@ -122,9 +112,9 @@ store: async (req, res) => {
             delete userToLogin.password;
             req.session.userLogged = userToLogin
 
-            /*if (req.body.remember_user) {
-                res.cookie("userEmail", req.body.email, { maxAge: 1000 * 60 * 100 });
-            }*/
+            if (req.body.remember_me) {
+                res.cookie("userEmail", req.body.email, { maxAge: 1000 * 60 });
+            }//nombre de la cookie useremail la estoy llamando ahi mismo
 
             
             return res.redirect('/profile'/*, {customer : userToLogin,}*/);
@@ -140,33 +130,8 @@ store: async (req, res) => {
     });
 },
 
-/*processLogin: async (req, res) => {
-  let userToLogin = await Customers.findByField('email', req.body.email);
-   
-  if (userToLogin) {
-    let isOkThePassword = await bcrypt.compare(password, userToLogin.password);
-
-    if (isOkThePassword) {
-      delete userToLogin.password;
-
-      if (req.body.remember_user) {
-        res.cookie("userEmail", email, { maxAge: 1000 * 60 * 100 });
-      }
-      
-      req.session.userLogged = userToLogin; //userLogged se genera aca
-     // req.session.userLogged = true;
-      return res.render("userAccount", { customer: userToLogin });
-    }
-  }
-
-  return res.render("login", {
-    errors: [{
-      msg: "Los datos son incorrectos",
-    }],
-  });
-},*/
 profile: (req, res) => {
-  console.log(req.session.userLogged)
+  console.log(req.cookies.userEmail)
   
 //  req.session.userLogged = true;
          return res.render('userAccount', {customer : req.session.userLogged});
@@ -180,8 +145,21 @@ profile: (req, res) => {
     req.session.destroy(); // borra todos los datos de session
     return res.redirect("/"); // y te redirije al home
   },
-
+  quienes: (req, res) => {
+    return res.send('quienes')
+  },
+  donde: (req, res) => {
+    return res.send('donde')
+  }, 
+  contacto: (req, res) => {
+    return res.send('contacto')
+  },
+  search: (req, res) => {
+    return res.send('quienes')
+  },       
   
     }
+
+    
 
 module.exports=userController;
