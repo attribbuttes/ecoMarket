@@ -113,11 +113,11 @@ store: async (req, res) => {
             req.session.userLogged = userToLogin
 
             if (req.body.remember_me) {
-                res.cookie("userEmail", req.body.email, { maxAge: 1000 * 60 });
+                res.cookie("userEmail", req.body.email, { maxAge: 1000 * 60 * 1000 });
             }//nombre de la cookie useremail la estoy llamando ahi mismo
 
             
-            return res.redirect('/profile'/*, {customer : userToLogin,}*/);
+            return res.redirect(/*{customer : userToLogin,}, */'/profile' );
         }
     }
 
