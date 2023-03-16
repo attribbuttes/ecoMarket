@@ -141,7 +141,7 @@ profile: (req, res) => {
 
 
   logout: (req, res) => {
-    
+    res.clearCookie('userEmail')
     req.session.destroy(); // borra todos los datos de session
     return res.redirect("/"); // y te redirije al home
   },
