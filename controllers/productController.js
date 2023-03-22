@@ -62,7 +62,6 @@ const productController = {
             price: req.body.price,
             release_date: req.body.release_date,
             cat_id: req.body.cat_id,
-          /*  rating: req.body.text,*/
             image: req.file.filename,
             text: req.body.text
           });
@@ -78,7 +77,7 @@ const productController = {
         let askGenres = db.Genre.findAll()
         Promise.all([askProduct,askGenres]) //cuando se terminen los 2 pedidos
             .then(function([product,genres]){
-                res.render('moviesEdit', {product, genres})
+                res.render('productEdit', {product, genres})
             })
     },
     update: (req,res) => {
@@ -108,7 +107,7 @@ const productController = {
         res.redirect('/products')
     },
     destroy: (req, res) => {
-        db.Products.destroy({
+        db.Product.destroy({
             where: {
                 id: req.params.id
             }

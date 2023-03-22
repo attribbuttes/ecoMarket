@@ -3,6 +3,13 @@ const router = express.Router();
 const path = require('path');
 const productController = require('../controllers/productController')
 
+
+const validations = require('../middlewares/validationsMiddleware')
+
+const guestMiddleware = require('../middlewares/guestMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
+const userLoggedMiddleware = require("../middlewares/userLoggedMiddleware");
+
 //multer
 const multer = require('multer');
 const storage = multer.diskStorage({//configuracion de la instancia
@@ -26,10 +33,10 @@ router.get('/detail/:id', productController.detail);
 
 router.get('/create', upload.single('image'), productController.add)
 router.post('/create', upload.single('image'), productController.create)
-router.get('/edit/:id', productController.edit);
-router.post('/update/:id', productController.update);
-router.get('/delete/:id', productController.delete);
-router.post('/delete/:id', productController.destroy);
+router.get('/edit/:id', upload.single('image'), authMiddleware, productController.edit);
+router.post('/update/:id', upload.single('image'), authMiddleware, productController.update);
+router.get('/destroy/:id', authMiddleware, productController.delete);
+router.post('/destroy/:id', authMiddleware,productController.destroy);
 
 router.get('/solutions', productController.solutions);
 router.get('/ecosust', productController.ecosust);
