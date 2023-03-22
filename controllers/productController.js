@@ -81,39 +81,35 @@ const productController = {
             })
     },
     update: (req,res) => {
-        db.Movie.update({ //modelo Pelicula
-            title: req.body.title, //title es el nombre en base de datos y titulo en el formulario
-            awards: req.body.awards,
-            release_date: req.body.release_date,
-            cat_id: req.body.genreID,
-            length: req.body.length
-           /* rating: req.body.rating*/
-        }, {
-            where: {
-                id:req.params.id
-            }
-        });
-        res.redirect('/movies/detail/' + req.params.id)
-        
-
-    },
+      db.Product.update({
+          name: req.body.name,
+          description: req.body.description,
+          price: req.body.price,
+          image: req.file ? req.file.filename : req.body.oldImage
+      }, {
+          where: {
+              id:req.params.id
+          }
+      });
+      res.redirect('/products/detail/' + req.params.id)
+  },
+  
 
     delete: (req, res) => {
-        db.Product.destroy({
-            where: {
-                id: req.params.id
-            }
+      db.Product.destroy({
+        where: {
+          id: req.params.id,
+        },
+      })
+        .then((result) => {
+          res.redirect('/products');
         })
-        res.redirect('/products')
+        .catch((error) => {
+          console.log(error);
+          res.redirect('/products');
+        });
     },
-    destroy: (req, res) => {
-        db.Product.destroy({
-            where: {
-                id: req.params.id
-            }
-        })
-        res.redirect('/products')
-    },
+    
     solutions: (req, res) => {
         db.Product.findAll({
           where: {

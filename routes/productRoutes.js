@@ -33,10 +33,10 @@ router.get('/detail/:id', productController.detail);
 
 router.get('/create', upload.single('image'), productController.add)
 router.post('/create', upload.single('image'), productController.create)
-router.get('/edit/:id', upload.single('image'), authMiddleware, productController.edit);
-router.post('/update/:id', upload.single('image'), authMiddleware, productController.update);
-router.get('/destroy/:id', authMiddleware, productController.delete);
-router.post('/destroy/:id', authMiddleware,productController.destroy);
+router.get('/:id/edit', authMiddleware, productController.edit);
+router.put('/:id/update', upload.single('image'), authMiddleware, productController.update);
+router.post('/:id/delete', authMiddleware, productController.delete);
+
 
 router.get('/solutions', productController.solutions);
 router.get('/ecosust', productController.ecosust);
