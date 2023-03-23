@@ -9,6 +9,9 @@ const validations = require('../middlewares/validationsMiddleware')
 const guestMiddleware = require('../middlewares/guestMiddleware');
 const authMiddleware = require('../middlewares/authMiddleware');
 const userLoggedMiddleware = require("../middlewares/userLoggedMiddleware");
+const checkAdminRole = require('../middlewares/checkAdminRole');
+const productOwnerMiddleware = require('../middlewares/productOwnerMiddleware');
+
 
 //multer
 const multer = require('multer');
@@ -31,11 +34,11 @@ router.get('/new', productController.new);
 //router.get('/recomended', productController.recomended);
 router.get('/detail/:id', productController.detail);
 
-router.get('/create', upload.single('image'), productController.add)
-router.post('/create', upload.single('image'), productController.create)
-router.get('/:id/edit', authMiddleware, productController.edit);
-router.post('/:id/update', upload.single('image'), authMiddleware, productController.update);
-router.post('/:id/delete', authMiddleware, productController.delete);
+router.get('/create', upload.single('image'),  productController.add)
+router.post('/create', upload.single('image'), productOwnerMiddleware, productController.create)
+router.get('/:id/edit', authMiddleware, checkAdminRole, productOwnerMiddleware, productController.edit);
+router.post('/:id/update', upload.single('image'), authMiddleware, productOwnerMiddleware, checkAdminRole, productController.update);
+router.post('/:id/delete', authMiddleware, checkAdminRole, productOwnerMiddleware, productController.delete);
 
 
 router.get('/solutions', productController.solutions);
