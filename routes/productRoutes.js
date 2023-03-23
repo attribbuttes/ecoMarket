@@ -34,7 +34,7 @@ router.get('/detail/:id', productController.detail);
 router.get('/create', upload.single('image'), productController.add)
 router.post('/create', upload.single('image'), productController.create)
 router.get('/:id/edit', authMiddleware, productController.edit);
-router.put('/:id/update', upload.single('image'), authMiddleware, productController.update);
+router.post('/:id/update', upload.single('image'), authMiddleware, productController.update);
 router.post('/:id/delete', authMiddleware, productController.delete);
 
 

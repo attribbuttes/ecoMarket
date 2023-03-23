@@ -80,6 +80,31 @@ const productController = {
                 res.render('productEdit', {product, genres})
             })
     },
+    
+    update: async (req, res) => {
+      try {
+          await db.Product.update({
+              name: req.body.name,
+              description: req.body.description,
+              price: req.body.price,
+              stock: req.body.stock,
+              image: req.file ? req.file.filename : req.body.oldImage,
+              genreId: req.body.genreId
+          }, {
+              where: {
+                  id: req.params.id
+              }
+          });
+          res.redirect('/products/detail/' + req.params.id);
+      } catch (error) {
+          console.log(error);
+          res.render('error', { error });
+      }
+  },
+  
+    
+    
+    /*
     update: (req,res) => {
       db.Product.update({
           name: req.body.name,
@@ -93,7 +118,7 @@ const productController = {
       });
       res.redirect('/products/detail/' + req.params.id)
   },
-  
+  */
 
     delete: (req, res) => {
       db.Product.destroy({
