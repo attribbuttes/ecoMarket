@@ -47,7 +47,7 @@ router.get('/outdoor', productController.outdoor);
 router.get('/organic', productController.organic);
 router.get('/cert', productController.cert);
 
-//router.get('/shoppingCart', productController.shoppingCart);
+router.get('/shoppingCart', productController.shoppingCart);
 
 
 

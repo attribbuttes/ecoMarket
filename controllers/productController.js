@@ -199,6 +199,10 @@ const productController = {
           res.render('error');
         }); 
     },
+    shoppingCart: (req, res) =>{
+      res.render('shoppingCart')
+    },
+
     organic: (req, res) => {
         db.Product.findAll({
           where: {
