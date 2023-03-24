@@ -1,8 +1,14 @@
+const db = require('../database/models')
+const products = db.Product;
+
 const productOwnerMiddleware = (req, res, next) => {
     const productId = req.params.id;
-    const product = db.getProductById(productId); // Replace this with your database function to retrieve the product
+    const product = db.Product(productId); // Replace this with your database function to retrieve the product
   
-    if (product && req.user.id === product.ownerId) {
+    if (req.customer.role === 'admin') {
+      // The current user is an admin, skip the owner check
+      next();
+    } else if (product && req.customer.id === product.ownerId) {
       // The current user is the owner of the product
       next();
     } else {
@@ -11,4 +17,4 @@ const productOwnerMiddleware = (req, res, next) => {
     }
   };
   
-module.exports = productOwnerMiddleware;
+  module.exports = productOwnerMiddleware;
