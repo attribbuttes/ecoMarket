@@ -3,7 +3,7 @@ const products = db.Product;
 
 const productOwnerMiddleware = (req, res, next) => {
     const productId = req.params.id;
-    const product = db.Product(productId); // Replace this with your database function to retrieve the product
+    const product = new db.Product(productId); // Replace this with your database function to retrieve the product
   
     if (req.customer.role === 'admin') {
       // The current user is an admin, skip the owner check
