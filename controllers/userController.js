@@ -92,7 +92,7 @@ store: async (req, res) => {
   },
 
   login: (req, res) => {
-    console.log(req.cookies.testing)
+    //console.log(req.cookies.testing)
       return res.render('login');
   },
 
@@ -131,7 +131,7 @@ store: async (req, res) => {
 },
 
 profile: (req, res) => {
-  console.log(req.cookies.userEmail)
+  //console.log(req.cookies.userEmail)
   
 //  req.session.userLogged = true;
          return res.render('userAccount', {customer : req.session.userLogged});

@@ -17,7 +17,7 @@ async function userLoggedMiddleware(req, res, next) {
       email: emailInCookie
     }
   })
-  console.log(customerFromCookie)
+  //console.log(customerFromCookie)
 }
     next();
   
