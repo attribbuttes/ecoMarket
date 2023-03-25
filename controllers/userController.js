@@ -61,7 +61,7 @@ store: async (req, res) => {
         const datosParaVista = {
             Customers: userToEdit
           }
-          res.render("userAccount", datosParaVista);
+          res.render("userEdit", datosParaVista);
   },
   update: async (req, res) => {
     const idUser = req.params.id;

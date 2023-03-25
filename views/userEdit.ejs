@@ -1,0 +1,65 @@
+<%- include('./partials/header')%>
+<%- include('./partials/head')%>
+<body>
+    <div class="container products-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="products-title">Formulario de edición de datos del Usuario</h2>
+            </div>
+        </div>
+        <div class="col-12">
+            <form action="/<%= customer.id %>/update" method="POST" enctype="multipart/form-data">
+
+                <div class="row product-detail">
+                    <div class="col-12 col-md-6">
+                        <label for="image" class="form-label">Imagen</label>
+                        <input type="file" id="image" name="image" class="form-input">
+                        <img src="<%= product.image %>" alt="<%= product.title %>">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="name" class="form-label">Nombre del producto:</label>
+                        <input type="text" id="name" name="title" placeholder="Ej: Zapatillas Reebok" class="form-input" value="<%= product.title %>">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="price" class="form-label">Precio del producto:</label>
+                        <input type="text" id="price" name="price" placeholder="Ej: 5678" class="form-input" value="<%= product.price %>">
+                    </div>
+                    <!--<div class="col-12 col-md-6">
+                        <label for="price" class="form-label">Rating</label>
+                        <input type="text" id="price" name="rating" placeholder="de 1 a 100" class="form-input">
+                    </div>-->
+                   <!-- <div class="col-12 col-md-6">
+                        <label for="discount" class="form-label">Fecha de lanzamiento</label>
+                        <input type="date" name="release_date" id="" value="<%= product.release_date %>" required>
+                    </div>-->
+                    <div class="col-12 col-md-6">
+                        <label for="category" class="form-label">Categoría:</label>
+                        <select name="cat_id" id="category" class="form-input" required>
+                            <option value="" disabled selected>- select genre - </option>
+                            <% genres.forEach(genre => { %>
+                                <option value="<%= genre.id %>" <% if (genre.id === product.cat_id) { %> selected <% } %>><%= genre.name %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="description" class="form-label">Descripción:</label>
+                        <textarea name="text" id="description" class="form-input"><%= product.text %></textarea>
+                    </div>
+    
+    
+    
+                    <div class="col-12">
+                        <button type="submit" class="buy-now-button">Actualizar producto</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    
+    </div>
+    <!-- /todos los productos -->
+    <%- include('./partials/footer')%>
+    
+
+<%- include('./partials/footer')%>
+
+</body>

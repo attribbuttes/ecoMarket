@@ -6,34 +6,51 @@
 	<!-- Header -->
 	<%- include('partials/header') %>
 	<!-- /Header -->
-	<!-- Container -->
-	<div class="container" style="margin-top: 40px;">
+
+	<!-- product detail -->
+	<div class="container products-wrapper">
 		<div class="row">
-			<div class="col-md-3">
-				<h2>Hi <%= customer.full_name %> </h2>
-				<img src="/images/user/<%= customer.image %> ">
-				<br>
-				<br>
-				<h2>hi <%= customer.email %> </h2>
+			
 
-				<div class="alert alert-success"><%= customer.email %> </div>
-				<h2>hi <%= customer.username %> </h2>
-				<h2>hi <%= customer.fav_prod %> </h2>
-				<h2>hi <%= customer.text %> </h2>
-				<h2>hi <%= customer.image %> </h2>
-				<h2>hi <%= customer.sex %> </h2>
-				<h2>hi <%= customer.password %> </h2>
-
-
-
-
-
-
+			<div class="col-12">
+				<h2 class="products-title">hi ! <%= customer.username %></h2>
 			</div>
 		</div>
+		<div class="product-detail">
+			<div class="row">
+				<div class="col-12 col-lg-8">
+					<img src="/images/user/<%= customer.image %>" alt="product image" class="product-detail-img">
+					<p class="product-detail-description">
+						<%= customer.text %>					</p>
+				</div>
+				<div class="col-12 col-lg-4">
+					<article class="product-detail-info">
+						<h2 class="product-detail-title"><%= customer.full_name %></h2>
+						
+							
+
+						
+						<hr>
+
+						<a href="/<%= customer.id %>/edit" class="action-button edit">EDITAR DATOS DE LA CUENTA</a>
+						<form action="/<%= customer.id %>/delete" method="POST" style="display: inline-flex">
+
+							<button type="submit" class="action-button delete">ELIMINAR CUENTA</button>
+						</form>
+						
+					</article>
+				</div>
+				
+			</div>
+			
+		</div>
+		
 	</div>
-	<!-- //Container -->
-	
-	<%- include('partials/footer'); %>
-</body>
+	<!-- /product detail -->
+
+	<!-- footer -->
+	<%- include('partials/footer') %>
+	<!-- /footer -->
+
+</body>	
 </html>

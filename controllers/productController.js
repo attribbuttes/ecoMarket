@@ -84,12 +84,12 @@ const productController = {
     update: async (req, res) => {
       try {
           await db.Product.update({
-              name: req.body.name,
-              description: req.body.description,
-              price: req.body.price,
-              stock: req.body.stock,
-              image: req.file ? req.file.filename : req.body.oldImage,
-              genreId: req.body.genreId
+            title: req.body.title,
+            price: req.body.price,
+            release_date: req.body.release_date,
+            cat_id: req.body.cat_id,
+            image: req.file.filename,
+            text: req.body.text
           }, {
               where: {
                   id: req.params.id
