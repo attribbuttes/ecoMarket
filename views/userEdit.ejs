@@ -14,42 +14,22 @@
                     <div class="col-12 col-md-6">
                         <label for="image" class="form-label">Imagen</label>
                         <input type="file" id="image" name="image" class="form-input">
-                        <img src="<%= product.image %>" alt="<%= product.title %>">
+                        <img src="<%= customer.image %>" alt="<%= customer.username %>">
                     </div>
                     <div class="col-12 col-md-6">
-                        <label for="name" class="form-label">Nombre del producto:</label>
-                        <input type="text" id="name" name="title" placeholder="Ej: Zapatillas Reebok" class="form-input" value="<%= product.title %>">
+                        <label for="name" class="form-label">Nombre del usuario:</label>
+                        <input type="text" id="name" name="full_name"  class="form-input" value="<%= customer.full_name %>">
                     </div>
-                    <div class="col-12 col-md-6">
-                        <label for="price" class="form-label">Precio del producto:</label>
-                        <input type="text" id="price" name="price" placeholder="Ej: 5678" class="form-input" value="<%= product.price %>">
-                    </div>
-                    <!--<div class="col-12 col-md-6">
-                        <label for="price" class="form-label">Rating</label>
-                        <input type="text" id="price" name="rating" placeholder="de 1 a 100" class="form-input">
-                    </div>-->
-                   <!-- <div class="col-12 col-md-6">
-                        <label for="discount" class="form-label">Fecha de lanzamiento</label>
-                        <input type="date" name="release_date" id="" value="<%= product.release_date %>" required>
-                    </div>-->
-                    <div class="col-12 col-md-6">
-                        <label for="category" class="form-label">Categoría:</label>
-                        <select name="cat_id" id="category" class="form-input" required>
-                            <option value="" disabled selected>- select genre - </option>
-                            <% genres.forEach(genre => { %>
-                                <option value="<%= genre.id %>" <% if (genre.id === product.cat_id) { %> selected <% } %>><%= genre.name %></option>
-                            <% }); %>
-                        </select>
-                    </div>
+                    
                     <div class="col-12">
                         <label for="description" class="form-label">Descripción:</label>
-                        <textarea name="text" id="description" class="form-input"><%= product.text %></textarea>
+                        <textarea name="text" id="description" class="form-input"><%= customer.text %></textarea>
                     </div>
     
     
     
                     <div class="col-12">
-                        <button type="submit" class="buy-now-button">Actualizar producto</button>
+                        <button type="submit" class="buy-now-button">Actualizar usuario</button>
                     </div>
                 </div>
             </form>

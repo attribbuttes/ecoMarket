@@ -55,14 +55,14 @@ module.exports = (sequelize, dataTypes) => {
                 foreignKey: 'cat_id'
         });
        
-        Product.belongsToMany(models.Customer, 
+       /* Product.belongsToMany(models.Customer, 
         {
           as: 'customers',
           through: 'customer_products', //tabla intermedia para hacer muchos a muchos
           foreignKey: 'prod_id', //clave q referencia a movie, la vclave q referencia ala pelicula, esta es la foreignkey de genero
-          otherKey: 'cust_id', //clave q referencia a actor
+          //otherKey: 'cust_id', //clave q referencia a actor
           timestamps: true
-        });
+        });*/
     };
     //Aquí debes realizar lo necesario para crear las relaciones con los otros modelos (Genre - Actor)
 

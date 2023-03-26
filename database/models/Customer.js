@@ -61,7 +61,7 @@ module.exports = (sequelize, dataTypes) => {
     }
     const Customer = sequelize.define(alias, cols, config); 
 
-    Customer.associate = function (models) { //un actor va a tener muchas peliculas
+    /*Customer.associate = function (models) { //un actor va a tener muchas peliculas
         Customer.belongsToMany(models.Product, {
           as: 'products',
           through: 'customer_products',
@@ -70,7 +70,7 @@ module.exports = (sequelize, dataTypes) => {
              //forein ki se refiere al modelo actor y other key al modelo movie
           timestamps: true
         });
-    };
+    };*/
     
  
     return Customer

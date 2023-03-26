@@ -50,7 +50,7 @@ store: async (req, res) => {
   }
 },
    
-    edit: async (req, res) => {
+  edit: async (req, res) => {
         const idUser = req.params.id;
         
         const userToEdit = await Customers.findByPk(idUser,{
@@ -58,10 +58,10 @@ store: async (req, res) => {
                 all: true
             }
         });
-        const datosParaVista = {
+        const customer = {
             Customers: userToEdit
           }
-          res.render("userEdit", datosParaVista);
+          res.render("userEdit", customer);
   },
   update: async (req, res) => {
     const idUser = req.params.id;
@@ -72,30 +72,25 @@ store: async (req, res) => {
     console.log("file->",req.file);
     //FILE
 
-    userToEdit.nombre = editedUser.nombre;
-    userToEdit.apellido = editedUser.apellido;
-    userToEdit.email = editedUser.email;
+    userToEdit.full_name = editedUser.full_name;
+    userToEdit.text = editedUser.text;
 
     if(req.file) {
-        userToEdit.image = "/images/usuarios/" + req.file.filename;
+        userToEdit.image = "/images/user/" + req.file.filename;
     }
     
     await userToEdit.save();
-    // await User.update(req.body, {
-    //   where: {
-    //     idUser: idUser
-    //   }
-    // });
+    
     const usuarioActualizado = await Customers.findByPk(idUser);
-
-    res.render('login', { Customers: usuarioActualizado });
-  },
-
+    const customer = {
+        Customers: usuarioActualizado
+    }
+    res.render("userEdit", {customer});
+},
   login: (req, res) => {
     //console.log(req.cookies.testing)
       return res.render('login');
   },
-
   processLogin: async (req, res) => {
     let userToLogin = await Customers.findOne({
         where: {

@@ -16,7 +16,7 @@ router.get('/create', guestMiddleware, userController.create);
 router.post('/create', upload.single('image'), validations, userController.store);
  
 router.get('/:id/edit', userController.edit) 
-router.put('/:id/update', userController.update)  
+router.post('/:id/update', userController.update)  
 
 router.get('/login', guestMiddleware, userController.login); 
 router.post('/login', userController.processLogin)
