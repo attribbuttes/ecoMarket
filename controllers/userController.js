@@ -45,48 +45,106 @@ store: async (req, res) => {
     
     res.redirect("login");
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     res.status(500).send(err);
   }
 },
    
-  edit: async (req, res) => {
-        const idUser = req.params.id;
-        
-        const userToEdit = await Customers.findByPk(idUser,{
-            include: {
-                all: true
-            }
-        });
-        const customer = {
-            Customers: userToEdit
-          }
-          res.render("userEdit", customer);
-  },
-  update: async (req, res) => {
-    const idUser = req.params.id;
-    const editedUser = req.body;
-    const userToEdit = await Customers.findByPk(idUser);
+edit: async (req, res) => {
+  const idUser = req.params.id;
+      
+  const userToEdit = await Customers.findByPk(idUser,{
+      include: {
+          all: true
+      }
+  });
 
-    //FILE 
-    console.log("file->",req.file);
-    //FILE
+  const customer = userToEdit
 
-    userToEdit.full_name = editedUser.full_name;
-    userToEdit.text = editedUser.text;
-
-    if(req.file) {
-        userToEdit.image = "/images/user/" + req.file.filename;
-    }
-    
-    await userToEdit.save();
-    
-    const usuarioActualizado = await Customers.findByPk(idUser);
-    const customer = {
-        Customers: usuarioActualizado
-    }
-    res.render("userEdit", {customer});
+  res.render("userEdit", { customer });
 },
+update: async (req, res) => {
+  const idUser = req.params.id;
+  const editedUser = req.body;
+  const userToEdit = await Customers.findByPk(idUser);
+
+  //FILE 
+  console.log("file->",req.file);
+  //FILE
+
+  userToEdit.username = editedUser.username;
+  userToEdit.text = editedUser.text;
+
+  if (req.file) {
+    userToEdit.image = "/images/user/" + req.file.filename;
+  }
+
+  await userToEdit.save();
+
+  const usuarioActualizado = await Customers.findByPk(idUser);
+  const customer = usuarioActualizado;
+  
+  console.log(customer);
+  res.render("userAccount", { customer });
+},
+
+
+
+
+
+
+/*update: async (req, res) => {
+  const idUser = req.params.id;
+  const editedUser = req.body;
+  const userToEdit = await Customers.findByPk(idUser);
+
+  //FILE 
+  console.log("file->",req.file);
+  //FILE
+
+  //userToEdit.full_name = editedUser.full_name;
+  userToEdit.username = editedUser.username;
+  userToEdit.text = editedUser.text;
+
+  if(req.file) {
+      userToEdit.image = "/images/user/" + req.file.filename;
+  }
+  
+  await userToEdit.save();
+  await Customers.update(req.body, {
+     where: {
+       idUser: idUser
+     }
+   });
+  const usuarioActualizado = await Customers.findByPk(idUser);
+  const customer = usuarioActualizado
+  console.log(customer)
+  res.render("userAccount", { customer });
+},*/
+/*update: async (req, res) => {
+  try {
+    const customer = await Customers.update({
+      full_name: req.body.full_name,
+      username: req.body.username,
+      role: req.body.role,
+      sex: req.body.sex,
+      email: req.body.email,
+      text: req.body.text
+    }, {
+      where: {
+        id: req.params.id
+      }
+    });
+    
+    console.log(customer)
+    res.redirect('/profile/' );
+  } catch (error) {
+    console.log(error);
+    res.render('userEdit', { error });
+  }
+},
+
+  */
   login: (req, res) => {
     //console.log(req.cookies.testing)
       return res.render('login');

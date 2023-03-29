@@ -26,7 +26,7 @@ async function userLoggedMiddleware(req, res, next) {
         res.locals.isAdmin = true;
       }
   }
-  console.log("User Logged In:", req.session.userLogged);  
+  //console.log("User Logged In:", req.session.userLogged);  
 
   next();
 }

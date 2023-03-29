@@ -12,12 +12,12 @@ module.exports = (sequelize, dataTypes) => {
                 },
         full_name: {
             type: dataTypes.STRING(100),
-            allowNull: false,
+          //  allowNull: false,
             field: 'full_name'
         },
         username: {
             type: dataTypes.STRING(100),
-            allowNull: false,
+            //allowNull: false,
             field: 'username'
         },
         sex: {
@@ -34,7 +34,7 @@ module.exports = (sequelize, dataTypes) => {
         },
         text: {
             type: dataTypes.STRING(100),
-            allowNull: false
+          //  allowNull: false
         },
         password: {
             type: dataTypes.STRING(255),

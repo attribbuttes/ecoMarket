@@ -4,21 +4,26 @@
     <div class="container products-wrapper">
         <div class="row">
             <div class="col-12">
-                <h2 class="products-title">Formulario de edición de datos del Usuario</h2>
+                <h2 class="products-title">Formulario de edición de datos del Usuario nro <%= customer.id %></h2>
             </div>
         </div>
         <div class="col-12">
             <form action="/<%= customer.id %>/update" method="POST" enctype="multipart/form-data">
 
                 <div class="row product-detail">
-                    <div class="col-12 col-md-6">
+                    <!--<div class="col-12 col-md-6">
                         <label for="image" class="form-label">Imagen</label>
                         <input type="file" id="image" name="image" class="form-input">
                         <img src="<%= customer.image %>" alt="<%= customer.username %>">
-                    </div>
+                    </div>-->
                     <div class="col-12 col-md-6">
                         <label for="name" class="form-label">Nombre del usuario:</label>
                         <input type="text" id="name" name="full_name"  class="form-input" value="<%= customer.full_name %>">
+                        <% if (locals.errors && errors.full_name) { %>
+                            <div class="text-danger">
+                                <%= errors.full_name.msg %>
+                            </div>
+                        <% } %>
                     </div>
                     
                     <div class="col-12">
