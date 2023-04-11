@@ -69,8 +69,10 @@ update: async (req, res) => {
   const userToEdit = await Customers.findByPk(idUser);
 
   //FILE 
-  console.log("file->",req.file);
+  //console.log("file->",req.file);
   //FILE
+  console.log('Request body:', req.body);
+  console.log('User to edit:', userToEdit);
 
   userToEdit.username = editedUser.username;
   userToEdit.text = editedUser.text;
@@ -84,10 +86,40 @@ update: async (req, res) => {
   const usuarioActualizado = await Customers.findByPk(idUser);
   const customer = usuarioActualizado;
   
-  console.log(customer);
+  console.log('Updated user:', customer);
   res.render("userAccount", { customer });
 },
 
+
+/*
+update: async (req, res) => {
+  const idUser = req.params.id;
+  const editedUser = req.body;
+  const userToEdit = await Customers.findByPk(idUser);
+
+  if (!userToEdit) {
+    return res.status(404).send('User not found');
+  }
+
+  userToEdit.full_name = editedUser.full_name;
+  userToEdit.text = editedUser.text;
+
+  if(req.file) {
+    userToEdit.image = "/images/user/" + req.file.filename;
+  }
+
+  await userToEdit.save();
+  await Customers.update(req.body, {
+     where: {
+       idUser: idUser
+     }
+   });
+  const usuarioActualizado = await Customers.findByPk(idUser);
+  const customer = usuarioActualizado
+  res.render("userAccount", { customer });
+},
+
+*/
 
 
 
@@ -199,7 +231,7 @@ profile: (req, res) => {
     return res.redirect("/"); // y te redirije al home
   },
   quienes: (req, res) => {
-    return res.send('quienes')
+    return res.render('who')
   },
   donde: (req, res) => {
     return res.send('donde')

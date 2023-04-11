@@ -34,7 +34,7 @@ router.get('/new', productController.new);
 //router.get('/recomended', productController.recomended);
 router.get('/detail/:id', productController.detail);
 
-router.get('/create', upload.single('image'),  productController.add)
+router.get('/create', upload.single('image'), authMiddleware, checkAdminRole, productOwnerMiddleware, productController.add)
 router.post('/create', upload.single('image'), productOwnerMiddleware, productController.create)
 router.get('/:id/edit', authMiddleware, checkAdminRole, productOwnerMiddleware, productController.edit);
 router.post('/:id/update', upload.single('image'), authMiddleware, productOwnerMiddleware, checkAdminRole, productController.update);

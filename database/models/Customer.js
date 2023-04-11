@@ -22,15 +22,15 @@ module.exports = (sequelize, dataTypes) => {
         },
         sex: {
             type: dataTypes.DECIMAL(3,1),
-            allowNull: false
+          //  allowNull: false
         },
         email: {
             type: dataTypes.STRING(100),
-            allowNull: false
+            //allowNull: false
         },
         image: {
             type: dataTypes.STRING(100),
-            allowNull: false
+            //allowNull: false
         },
         text: {
             type: dataTypes.STRING(100),
@@ -38,13 +38,13 @@ module.exports = (sequelize, dataTypes) => {
         },
         password: {
             type: dataTypes.STRING(255),
-            allowNull: false,
+         //   allowNull: false,
             field: 'password'
           },
         role: {
             type: dataTypes.ENUM('customer', 'admin'),
-            allowNull: false,
-            //defaultValue: 'customer'
+          //  allowNull: false,
+            defaultValue: 'customer'
           },
         /*fav_prod: {
             type: dataTypes.DECIMAL(3,1),
